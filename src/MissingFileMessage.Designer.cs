@@ -48,43 +48,46 @@
             // label1
             // 
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.label1.Location = new System.Drawing.Point(12, 150);
+            this.label1.Location = new System.Drawing.Point(18, 208);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(415, 59);
+            this.label1.Size = new System.Drawing.Size(622, 82);
             this.label1.TabIndex = 0;
-            this.label1.Text = "This custom asset\'s file cannot be found. \r\n\r\nYou can connect this asset to a new" +
-    " file below, or you can ignore this error.";
+            this.label1.Text = "找不到此自定义资产的文件. \r\n\r\n您可以将此资产连接到下面的新文件，也可以忽略此错误.";
             // 
             // AddAddressable
             // 
             this.AddAddressable.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.AddAddressable.Location = new System.Drawing.Point(10, 278);
+            this.AddAddressable.Location = new System.Drawing.Point(15, 385);
+            this.AddAddressable.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.AddAddressable.Name = "AddAddressable";
-            this.AddAddressable.Size = new System.Drawing.Size(127, 31);
+            this.AddAddressable.Size = new System.Drawing.Size(190, 43);
             this.AddAddressable.TabIndex = 2;
-            this.AddAddressable.Text = "Add As Addressable";
+            this.AddAddressable.Text = "添加为Addressable";
             this.AddAddressable.UseVisualStyleBackColor = true;
             this.AddAddressable.Click += new System.EventHandler(this.AddAddressable_Click);
             // 
             // AddAsAssetBundle
             // 
             this.AddAsAssetBundle.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.AddAsAssetBundle.Location = new System.Drawing.Point(143, 278);
+            this.AddAsAssetBundle.Location = new System.Drawing.Point(214, 385);
+            this.AddAsAssetBundle.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.AddAsAssetBundle.Name = "AddAsAssetBundle";
-            this.AddAsAssetBundle.Size = new System.Drawing.Size(127, 31);
+            this.AddAsAssetBundle.Size = new System.Drawing.Size(190, 43);
             this.AddAsAssetBundle.TabIndex = 3;
-            this.AddAsAssetBundle.Text = "Add As Asset Bundle";
+            this.AddAsAssetBundle.Text = "添加为Asset Bundle";
             this.AddAsAssetBundle.UseVisualStyleBackColor = true;
             this.AddAsAssetBundle.Click += new System.EventHandler(this.AddAsAssetBundle_Click);
             // 
             // IgnoreAsset
             // 
             this.IgnoreAsset.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.IgnoreAsset.Location = new System.Drawing.Point(346, 278);
+            this.IgnoreAsset.Location = new System.Drawing.Point(519, 385);
+            this.IgnoreAsset.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.IgnoreAsset.Name = "IgnoreAsset";
-            this.IgnoreAsset.Size = new System.Drawing.Size(77, 31);
+            this.IgnoreAsset.Size = new System.Drawing.Size(116, 43);
             this.IgnoreAsset.TabIndex = 4;
-            this.IgnoreAsset.Text = "Ignore";
+            this.IgnoreAsset.Text = "忽略";
             this.IgnoreAsset.UseVisualStyleBackColor = true;
             this.IgnoreAsset.Click += new System.EventHandler(this.DeleteAsset_Click);
             // 
@@ -95,21 +98,24 @@
             this.CustomAsset_Group.Controls.Add(this.FilePath_Label);
             this.CustomAsset_Group.Controls.Add(this.FileType_Label);
             this.CustomAsset_Group.Controls.Add(this.AssetType_Label);
-            this.CustomAsset_Group.Location = new System.Drawing.Point(15, 13);
+            this.CustomAsset_Group.Location = new System.Drawing.Point(22, 18);
+            this.CustomAsset_Group.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.CustomAsset_Group.Name = "CustomAsset_Group";
-            this.CustomAsset_Group.Size = new System.Drawing.Size(491, 119);
+            this.CustomAsset_Group.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.CustomAsset_Group.Size = new System.Drawing.Size(736, 165);
             this.CustomAsset_Group.TabIndex = 2;
             this.CustomAsset_Group.TabStop = false;
-            this.CustomAsset_Group.Text = "Custom Asset";
+            this.CustomAsset_Group.Text = "自定义资产";
             // 
             // PastFilePath_Text
             // 
             this.PastFilePath_Text.BackColor = System.Drawing.SystemColors.Control;
             this.PastFilePath_Text.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.PastFilePath_Text.Location = new System.Drawing.Point(63, 82);
+            this.PastFilePath_Text.Location = new System.Drawing.Point(108, 114);
+            this.PastFilePath_Text.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.PastFilePath_Text.Multiline = true;
             this.PastFilePath_Text.Name = "PastFilePath_Text";
-            this.PastFilePath_Text.Size = new System.Drawing.Size(413, 23);
+            this.PastFilePath_Text.Size = new System.Drawing.Size(620, 32);
             this.PastFilePath_Text.TabIndex = 2;
             this.PastFilePath_Text.TabStop = false;
             this.PastFilePath_Text.Text = "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO\r\n";
@@ -117,75 +123,82 @@
             // Asset_Name_Label
             // 
             this.Asset_Name_Label.AutoSize = true;
-            this.Asset_Name_Label.Location = new System.Drawing.Point(7, 40);
+            this.Asset_Name_Label.Location = new System.Drawing.Point(10, 55);
+            this.Asset_Name_Label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Asset_Name_Label.Name = "Asset_Name_Label";
-            this.Asset_Name_Label.Size = new System.Drawing.Size(67, 13);
+            this.Asset_Name_Label.Size = new System.Drawing.Size(107, 18);
             this.Asset_Name_Label.TabIndex = 1;
-            this.Asset_Name_Label.Text = "Asset Name:";
+            this.Asset_Name_Label.Text = "资产名:";
             // 
             // FilePath_Label
             // 
             this.FilePath_Label.AutoSize = true;
-            this.FilePath_Label.Location = new System.Drawing.Point(6, 82);
+            this.FilePath_Label.Location = new System.Drawing.Point(9, 114);
+            this.FilePath_Label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.FilePath_Label.Name = "FilePath_Label";
-            this.FilePath_Label.Size = new System.Drawing.Size(51, 13);
+            this.FilePath_Label.Size = new System.Drawing.Size(98, 18);
             this.FilePath_Label.TabIndex = 1;
-            this.FilePath_Label.Text = "File Path:";
+            this.FilePath_Label.Text = "文件路径:";
             // 
             // FileType_Label
             // 
             this.FileType_Label.AutoSize = true;
-            this.FileType_Label.Location = new System.Drawing.Point(7, 60);
+            this.FileType_Label.Location = new System.Drawing.Point(10, 83);
+            this.FileType_Label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.FileType_Label.Name = "FileType_Label";
-            this.FileType_Label.Size = new System.Drawing.Size(53, 13);
+            this.FileType_Label.Size = new System.Drawing.Size(98, 18);
             this.FileType_Label.TabIndex = 1;
-            this.FileType_Label.Text = "File Type:";
+            this.FileType_Label.Text = "文件类型:";
             // 
             // AssetType_Label
             // 
             this.AssetType_Label.AutoSize = true;
-            this.AssetType_Label.Location = new System.Drawing.Point(7, 20);
+            this.AssetType_Label.Location = new System.Drawing.Point(10, 28);
+            this.AssetType_Label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.AssetType_Label.Name = "AssetType_Label";
-            this.AssetType_Label.Size = new System.Drawing.Size(63, 13);
+            this.AssetType_Label.Size = new System.Drawing.Size(107, 18);
             this.AssetType_Label.TabIndex = 0;
-            this.AssetType_Label.Text = "Asset Type:";
+            this.AssetType_Label.Text = "资产类型:";
             // 
             // BrowseButton
             // 
             this.BrowseButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.BrowseButton.Location = new System.Drawing.Point(15, 209);
+            this.BrowseButton.Location = new System.Drawing.Point(22, 289);
+            this.BrowseButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.BrowseButton.Name = "BrowseButton";
-            this.BrowseButton.Size = new System.Drawing.Size(68, 24);
+            this.BrowseButton.Size = new System.Drawing.Size(102, 33);
             this.BrowseButton.TabIndex = 0;
-            this.BrowseButton.Text = "Browse";
+            this.BrowseButton.Text = "浏览";
             this.BrowseButton.UseVisualStyleBackColor = true;
             this.BrowseButton.Click += new System.EventHandler(this.BrowseButton_Click);
             // 
             // NewFilePath_Text
             // 
             this.NewFilePath_Text.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.NewFilePath_Text.Location = new System.Drawing.Point(90, 211);
+            this.NewFilePath_Text.Location = new System.Drawing.Point(135, 292);
+            this.NewFilePath_Text.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.NewFilePath_Text.Name = "NewFilePath_Text";
-            this.NewFilePath_Text.Size = new System.Drawing.Size(416, 20);
+            this.NewFilePath_Text.Size = new System.Drawing.Size(622, 28);
             this.NewFilePath_Text.TabIndex = 1;
             this.NewFilePath_Text.DoubleClick += new System.EventHandler(this.NewFilePath_Text_DoubleClick);
             // 
             // IgnoreAllAsset
             // 
             this.IgnoreAllAsset.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.IgnoreAllAsset.Location = new System.Drawing.Point(432, 278);
+            this.IgnoreAllAsset.Location = new System.Drawing.Point(648, 385);
+            this.IgnoreAllAsset.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.IgnoreAllAsset.Name = "IgnoreAllAsset";
-            this.IgnoreAllAsset.Size = new System.Drawing.Size(77, 31);
+            this.IgnoreAllAsset.Size = new System.Drawing.Size(116, 43);
             this.IgnoreAllAsset.TabIndex = 5;
-            this.IgnoreAllAsset.Text = "Ignore All";
+            this.IgnoreAllAsset.Text = "忽略全部";
             this.IgnoreAllAsset.UseVisualStyleBackColor = true;
             this.IgnoreAllAsset.Click += new System.EventHandler(this.IgnoreAllAsset_Click);
             // 
             // MissingFileMessage
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(518, 323);
+            this.ClientSize = new System.Drawing.Size(777, 447);
             this.ControlBox = false;
             this.Controls.Add(this.NewFilePath_Text);
             this.Controls.Add(this.CustomAsset_Group);
@@ -197,10 +210,11 @@
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "MissingFileMessage";
-            this.Text = "Missing file detected";
+            this.Text = "检测到丢失的文件";
             this.Load += new System.EventHandler(this.MissingFileMessage_Load);
             this.CustomAsset_Group.ResumeLayout(false);
             this.CustomAsset_Group.PerformLayout();

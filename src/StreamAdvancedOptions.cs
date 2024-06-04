@@ -6,7 +6,7 @@ namespace CustomStreamMaker
 {
     public partial class StreamAdvancedOptions : Form
     {
-        StreamEditor editor;
+        readonly StreamEditor editor;
         public StreamAdvancedOptions(StreamEditor streamEditor)
         {
             editor = streamEditor;
@@ -31,9 +31,7 @@ namespace CustomStreamMaker
             HasCustomEndScreen_Check.Checked = editor.settings.HasCustomEndScreen;
             OpenEndScreenImg_Button.Enabled = HasCustomEndScreen_Check.Checked;
             CustomEndScreen_Text.Enabled = HasCustomEndScreen_Check.Checked;
-            if (File.Exists(editor.settings.CustomEndScreenPath))
-                CustomEndScreen_Text.Text = editor.settings.CustomEndScreenPath;
-            else CustomEndScreen_Text.Text = "";
+            CustomEndScreen_Text.Text = File.Exists(editor.settings.CustomEndScreenPath) ? editor.settings.CustomEndScreenPath : "";
             GameChair_Checked.Checked = editor.settings.HasChair;
         }
 
@@ -140,11 +138,13 @@ namespace CustomStreamMaker
 
         private void SetCustomEndScreenFile()
         {
-            OpenFileDialog openNsoStream = new OpenFileDialog();
-            openNsoStream.InitialDirectory = string.IsNullOrEmpty(Properties.Settings.Default.EndScreenDirectory) ? Environment.GetFolderPath(Environment.SpecialFolder.MyPictures) : Properties.Settings.Default.EndScreenDirectory;
-            openNsoStream.Filter = "png File (*.png)|*.png|jpg File (*.jpg)|*.jpg";
-            openNsoStream.FilterIndex = 1;
-            openNsoStream.RestoreDirectory = true;
+            OpenFileDialog openNsoStream = new()
+            {
+                InitialDirectory = string.IsNullOrEmpty(Properties.Settings.Default.EndScreenDirectory) ? Environment.GetFolderPath(Environment.SpecialFolder.MyPictures) : Properties.Settings.Default.EndScreenDirectory,
+                Filter = "png File (*.png)|*.png|jpg File (*.jpg)|*.jpg",
+                FilterIndex = 1,
+                RestoreDirectory = true
+            };
             if (openNsoStream.ShowDialog() == DialogResult.OK)
             {
                 Properties.Settings.Default.EndScreenDirectory = Path.GetDirectoryName(openNsoStream.FileName);

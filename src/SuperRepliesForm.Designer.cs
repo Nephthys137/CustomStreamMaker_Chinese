@@ -89,7 +89,7 @@
             // 
             this.KAngelDialogue.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.KAngelDialogue.HeaderText = "Dialogue";
-            this.KAngelDialogue.Name = "KAngelDialogue";
+            this.KAngelDialogue.Name = "回复";
             this.KAngelDialogue.ReadOnly = true;
             // 
             // KAnimReply_List
@@ -120,7 +120,7 @@
             this.KAnimReply_Label.Name = "KAnimReply_Label";
             this.KAnimReply_Label.Size = new System.Drawing.Size(90, 13);
             this.KAnimReply_Label.TabIndex = 4;
-            this.KAnimReply_Label.Text = "KAngel Animation";
+            this.KAnimReply_Label.Text = "动画";
             // 
             // label1
             // 
@@ -129,7 +129,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(86, 13);
             this.label1.TabIndex = 4;
-            this.label1.Text = "KAngel Dialogue";
+            this.label1.Text = "回复";
             // 
             // groupBox1
             // 
@@ -139,7 +139,7 @@
             this.groupBox1.Size = new System.Drawing.Size(349, 123);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Super Chat Comment";
+            this.groupBox1.Text = "Super Chat";
             // 
             // SuperChatComment
             // 
@@ -160,7 +160,7 @@
             this.AddEditSuperReply_Button.Name = "AddEditSuperReply_Button";
             this.AddEditSuperReply_Button.Size = new System.Drawing.Size(348, 53);
             this.AddEditSuperReply_Button.TabIndex = 6;
-            this.AddEditSuperReply_Button.Text = "Add Reply";
+            this.AddEditSuperReply_Button.Text = "添加回复";
             this.AddEditSuperReply_Button.UseVisualStyleBackColor = true;
             this.AddEditSuperReply_Button.Click += new System.EventHandler(this.AddEditSuperReply_Button_Click);
             // 
@@ -182,7 +182,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SuperRepliesForm";
-            this.Text = "Extra Super Chat Replies";
+            this.Text = "额外的Super Chat回复";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SuperRepliesForm_FormClosing);
             this.Load += new System.EventHandler(this.SuperRepliesForm_Load);
             this.Click += new System.EventHandler(this.SuperRepliesForm_Click);

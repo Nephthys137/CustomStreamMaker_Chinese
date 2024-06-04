@@ -24,13 +24,13 @@ namespace CustomStreamMaker
 
         string _currentFile;
 
-        List<EditHistory> _undoHistory = new();
-        List<EditHistory> _redoHistory = new();
+        readonly List<EditHistory> _undoHistory = [];
+        readonly List<EditHistory> _redoHistory = [];
 
         WaveOut soundPreview;
         WaveOut musicPreview;
         SoundPlayingAt soundPlayingAt;
-        List<string> animList = new List<string>(ThatOneLongListOfAnimationsOriginallyInTheGame.list);
+        readonly List<string> animList = new(ThatOneLongListOfAnimationsOriginallyInTheGame.list);
         internal StreamSettings savedSettings;
         internal StreamSettings settings = new();
 
@@ -38,7 +38,7 @@ namespace CustomStreamMaker
         int undoCountOnSave = 0;
         PlayingObject lastUndoObjOnSave;
 
-        Dictionary<string, StreamBackground> backgroundDict = new Dictionary<string, StreamBackground>()
+        readonly Dictionary<string, StreamBackground> backgroundDict = new()
         {
 
                     {"bg_stream", StreamBackground.Default},
@@ -58,19 +58,19 @@ namespace CustomStreamMaker
 
         };
 
-        int _newPlayingTypeIndex;
+        readonly int _newPlayingTypeIndex;
 
-        string _newCurrentKAnim;
-        string _newCurrentKDialogue;
-        bool _newIsHateComment;
-        string _newCurrentSE;
-        string _newCurrentMusic;
-        string _newCurrentEffect;
-        string _newCurrentChatComment;
-        ChatCommentType _newCurrentChatCommentType;
-        string _newCurrentKAnimReply;
-        string _newCurrentKReply;
-        string _newCurrentHateComment;
+        readonly string _newCurrentKAnim;
+        readonly string _newCurrentKDialogue;
+        readonly bool _newIsHateComment;
+        readonly string _newCurrentSE;
+        readonly string _newCurrentMusic;
+        readonly string _newCurrentEffect;
+        readonly string _newCurrentChatComment;
+        readonly ChatCommentType _newCurrentChatCommentType;
+        readonly string _newCurrentKAnimReply;
+        readonly string _newCurrentKReply;
+        readonly string _newCurrentHateComment;
         internal List<KAngelSays> _newCurrentSuperReplies;
 
 
@@ -79,7 +79,7 @@ namespace CustomStreamMaker
         string _currentKAnimReply;
         string _currentSE;
         string _currentMusic;
-        internal List<KAngelSays> _currentSuperReplies = new() { new("stream_cho_akaruku", "") };
+        internal List<KAngelSays> _currentSuperReplies = [new("stream_cho_akaruku", "")];
 
 
         public StreamEditor()
@@ -131,7 +131,7 @@ namespace CustomStreamMaker
             musicPreview = AssetExtractor.GetCachedAudio(audioName);
             if (musicPreview == null)
                 return;
-            var playAudio = () =>
+            void playAudio()
             {
                 musicPreview.Play();
                 while (musicPreview != null && musicPreview.PlaybackState == PlaybackState.Playing)
@@ -139,7 +139,7 @@ namespace CustomStreamMaker
                     Thread.Sleep(100);
                 }
                 Thread.Sleep(100);
-            };
+            }
             while (musicPreview != null)
             {
                 await Task.Run(playAudio);
@@ -156,7 +156,7 @@ namespace CustomStreamMaker
             if (soundPreview == null)
                 return;
             soundPreview.PlaybackStopped += (object sender, StoppedEventArgs e) => { soundPreview.Dispose(); };
-            var playAudio = () =>
+            void playAudio()
             {
                 soundPreview.Play();
                 while (soundPreview != null && soundPreview.PlaybackState == PlaybackState.Playing)
@@ -164,7 +164,7 @@ namespace CustomStreamMaker
                     Thread.Sleep(100);
                 }
                 Thread.Sleep(100);
-            };
+            }
             while (soundPreview != null)
             {
                 await Task.Run(playAudio);
@@ -335,7 +335,7 @@ namespace CustomStreamMaker
         private string[] CreateEffectList()
         {
             string[] s =
-                {
+                [
                    "None",
                    "Kenjo",
                    "Body",
@@ -344,14 +344,14 @@ namespace CustomStreamMaker
                    "Gothic",
                    "Porori",
                    "Ide"
-                };
+                ];
             return s;
         }
 
         private string[] CreateBackgroundList()
         {
             string[] s =
-                {
+                [
                     "bg_stream",
                     "bg_stream_shield_silver",
                     "bg_stream_shield_gold",
@@ -366,14 +366,14 @@ namespace CustomStreamMaker
                     "bg_stream_sayonara",
                     "black",
                     "white"
-                };
+                ];
             return s;
         }
         private string[] CreateMusicList(bool isBGM)
         {
-            List<string> list = new List<string>(Enum.GetNames(typeof(SoundType)));
+            List<string> list = new(Enum.GetNames(typeof(SoundType)));
 
-            return isBGM ? list.FindAll(s => s.StartsWith("BGM_")).ToArray() : list.FindAll(s => s.StartsWith("SE_")).ToArray();
+            return isBGM ? [.. list.FindAll(s => s.StartsWith("BGM_"))] : [.. list.FindAll(s => s.StartsWith("SE_"))];
         }
 
         private void InitializeEffectIntensity()
@@ -384,7 +384,7 @@ namespace CustomStreamMaker
                 IntensityNum.Text = "0";
                 return;
             }
-            settings.EffectIntensity = (EffectIntensity_Trackbar.Value / 100f);
+            settings.EffectIntensity = EffectIntensity_Trackbar.Value / 100f;
             IntensityNum.Text = settings.EffectIntensity.ToString();
         }
 
@@ -594,12 +594,14 @@ namespace CustomStreamMaker
             StartingAnimation_List.Text.ToLower();
             ValidateStartingAnimationValue(StartingAnimation_List, ref settings.StartingAnimation);
             settings.StartingAnimation = StartingAnimation_List.Text;
-            if (!animList.Contains(settings.StartingAnimation) && (CustomAssetExtractor.customAssets.Count > 0 && CustomAssetExtractor.customAssets.Exists(a => a.fileName == settings.StartingAnimation && a.customAssetType == CustomAssetType.Sprite)))
+            if (!animList.Contains(settings.StartingAnimation) && CustomAssetExtractor.customAssets.Count > 0 && CustomAssetExtractor.customAssets.Exists(a => a.fileName == settings.StartingAnimation && a.customAssetType == CustomAssetType.Sprite))
             {
                 var refAsset = CustomAssetExtractor.customAssets.Find(a => a.fileName == settings.StartingAnimation && a.customAssetType == CustomAssetType.Sprite);
-                settings.CustomStartingAnimation = new CustomAsset(CustomAssetType.Sprite, refAsset.customAssetFileType, refAsset.fileName, refAsset.filePath);
-                settings.CustomStartingAnimation.picWidth = refAsset.picWidth;
-                settings.CustomStartingAnimation.picHeight = refAsset.picHeight;
+                settings.CustomStartingAnimation = new CustomAsset(CustomAssetType.Sprite, refAsset.customAssetFileType, refAsset.fileName, refAsset.filePath)
+                {
+                    picWidth = refAsset.picWidth,
+                    picHeight = refAsset.picHeight
+                };
             }
             else settings.CustomStartingAnimation = null;
             SetNewSpritePreview(settings.StartingAnimation);
@@ -614,7 +616,7 @@ namespace CustomStreamMaker
         private void StartingMusic_List_Leave(object sender, EventArgs e)
         {
             ValidateSoundValue(StartingMusic_List, ref settings.StartingMusic, true);
-            settings.StartingMusic = (SoundType)Enum.Parse(typeof(SoundType), (string)StartingMusic_List.Text);
+            settings.StartingMusic = (SoundType)Enum.Parse(typeof(SoundType), StartingMusic_List.Text);
             StopMusicifPlaying();
             ChangeFileLabelIfUnsaved();
         }
@@ -623,14 +625,14 @@ namespace CustomStreamMaker
         {
             var type = (SoundType)Enum.Parse(typeof(SoundType), _currentSE);
             ValidateSoundValue(PlaySE_List, ref type, false);
-            _currentSE = (string)PlaySE_List.Text;
+            _currentSE = PlaySE_List.Text;
         }
 
         private void PlayMusic_List_Leave(object sender, EventArgs e)
         {
             var type = (SoundType)Enum.Parse(typeof(SoundType), _currentMusic);
             ValidateSoundValue(PlayMusic_List, ref type, true);
-            _currentMusic = (string)PlayMusic_List.Text;
+            _currentMusic = PlayMusic_List.Text;
 
         }
 
@@ -771,41 +773,25 @@ namespace CustomStreamMaker
 
         string SetPlayingType(PlayingObject playingObject)
         {
-            switch (playingObject.PlayingType)
+            return playingObject.PlayingType switch
             {
-                case PlayingType.KAngelSays:
-                    return "KAngel Dialogue";
-                case PlayingType.KAngelCallout:
-                    return "KAngel Hater Callout";
-                case PlayingType.ChatSays:
-                    return "Chat Comment";
-                case PlayingType.ChatSuper:
-                    return "Super Chat";
-                case PlayingType.ChatBad:
-                    return "Stressful Chat Comment";
-                case PlayingType.PlaySE:
-                    return "Sound Effect";
-                case PlayingType.PlayBGM:
-                    return "Music Change";
-                case PlayingType.PlayEffect:
-                    return "Border Effect";
-                case PlayingType.ChatFirst:
-                    return "Random First Comments";
-                case PlayingType.ChatMiddle:
-                    return "Random Middle Comments";
-                case PlayingType.ChatLast:
-                    return "Random Last Comments";
-                case PlayingType.ChatRainbow:
-                    return "Rainbow Super Chat";
-                case PlayingType.ChatDelete:
-                    return "Delete Last Chat Comment";
-                case PlayingType.ChatDeleteAll:
-                    return "Delete All (Normal) Chat Comments";
-                case PlayingType.ReadSuperChats:
-                    return "Start Reading Chosen Super Chats";
-                default:
-                    return "";
-            }
+                PlayingType.KAngelSays => "互动",
+                PlayingType.KAngelCallout => "负面评论",
+                PlayingType.ChatSays => "聊天评论",
+                PlayingType.ChatSuper => "SuperChat",
+                PlayingType.ChatBad => "有压力的聊天评论",
+                PlayingType.PlaySE => "音效",
+                PlayingType.PlayBGM => "音乐",
+                PlayingType.PlayEffect => "边框效果",
+                PlayingType.ChatFirst => "随机开播评论",
+                PlayingType.ChatMiddle => "随机评论",
+                PlayingType.ChatLast => "随机结束评论",
+                PlayingType.ChatRainbow => "彩虹SuperChat",
+                PlayingType.ChatDelete => "删除最后一条评论",
+                PlayingType.ChatDeleteAll => "删除所有(普通)评论",
+                PlayingType.ReadSuperChats => "开始阅读SuperChat",
+                _ => "",
+            };
         }
 
         string SetPlayingDesc(PlayingObject playingObject)
@@ -822,7 +808,7 @@ namespace CustomStreamMaker
                 case PlayingType.ChatBad:
                 case PlayingType.ChatSuper:
                     var chat = playingObject as ChatSays;
-                    List<string> list = new List<string>();
+                    List<string> list = [];
                     if (chat.Replies != null && chat.PlayingType == PlayingType.ChatSuper)
                     {
                         for (int i = 0; i < chat.Replies.Count; i++)
@@ -872,7 +858,7 @@ namespace CustomStreamMaker
                 chatCom.SetBadComment();
             else if (IsSuperChat_Check.Checked)
             {
-                List<KAngelSays> newList = new List<KAngelSays>();
+                List<KAngelSays> newList = [];
                 for (int i = 0; i < _currentSuperReplies.Count; i++)
                 {
                     CustomAsset customAsset = null;
@@ -894,13 +880,11 @@ namespace CustomStreamMaker
 
         private BorderEffectType ApplyBorderTransition()
         {
-            if (BorderEffect_In_Radio.Checked)
-                return BorderEffectType.EaseIn;
-            else if (BorderEffectWinStop_Radio.Checked)
-                return BorderEffectType.EaseBeforePlay;
-            else if (BorderEffectWin_Radio.Checked)
-                return BorderEffectType.Play;
-            else return BorderEffectType.EaseOut;
+            return BorderEffect_In_Radio.Checked
+                ? BorderEffectType.EaseIn
+                : BorderEffectWinStop_Radio.Checked
+                ? BorderEffectType.EaseBeforePlay
+                : BorderEffectWin_Radio.Checked ? BorderEffectType.Play : BorderEffectType.EaseOut;
         }
 
         private void AddSaveToPlayingList_Button_Click(object sender, EventArgs e)
@@ -938,7 +922,7 @@ namespace CustomStreamMaker
             {
                 InsertAbove_Button.Visible = true;
                 InsertBelow_Button.Visible = true;
-                AddSaveToPlayingList_Button.Text = "Save To Playing List";
+                AddSaveToPlayingList_Button.Text = "保存到播放列表";
             }
             else
             {
@@ -946,7 +930,7 @@ namespace CustomStreamMaker
                 InsertBelow_Button.Visible = false;
                 if (PlayingType_List.SelectedIndex == 11)
                     CheckIfReactionAnimExists();
-                AddSaveToPlayingList_Button.Text = "Add To Playing List";
+                AddSaveToPlayingList_Button.Text = "添加到播放列表";
             }
         }
 
@@ -1011,7 +995,7 @@ namespace CustomStreamMaker
                     {
                         KAnim_SuperReply_List.Text = "stream_cho_akaruku";
                         KAngelReply_TextBox.Text = "";
-                        _currentSuperReplies = new() { new("stream_cho_akaruku", "") };
+                        _currentSuperReplies = [new("stream_cho_akaruku", "")];
                     }
                     break;
                 case PlayingType.PlaySE:
@@ -1153,7 +1137,7 @@ namespace CustomStreamMaker
                 StopMusicifPlaying();
                 return;
             };
-            SetMusicPreview(settings.StartingMusic.ToString());
+            _ = SetMusicPreview(settings.StartingMusic.ToString());
             soundPlayingAt = SoundPlayingAt.StartingMusic;
             PlayStartingMusic_Button.Text = "◼️";
         }
@@ -1192,7 +1176,7 @@ namespace CustomStreamMaker
 
         private void StartingMusic_List_SelectedIndexChanged(object sender, EventArgs e)
         {
-            settings.StartingMusic = (SoundType)Enum.Parse(typeof(SoundType), (string)StartingMusic_List.Text);
+            settings.StartingMusic = (SoundType)Enum.Parse(typeof(SoundType), StartingMusic_List.Text);
             StopMusicifPlaying();
             ChangeFileLabelIfUnsaved();
         }
@@ -1209,7 +1193,7 @@ namespace CustomStreamMaker
                 StopSoundEffectIfPlaying();
                 return;
             }
-            SetSoundEffectPreview(_currentSE);
+            _ = SetSoundEffectPreview(_currentSE);
             PlayCurrentSE_Button.Text = "◼️";
         }
 
@@ -1222,7 +1206,7 @@ namespace CustomStreamMaker
                 StopMusicifPlaying();
                 return;
             }
-            SetMusicPreview(_currentMusic);
+            _ = SetMusicPreview(_currentMusic);
             soundPlayingAt = SoundPlayingAt.PlayMusic;
             PlayCurrentMusic_Button.Text = "◼️";
         }
@@ -1254,7 +1238,7 @@ namespace CustomStreamMaker
 
         private void AddEditReplies_TextBox_Click(object sender, EventArgs e)
         {
-            ChatSays chat = new ChatSays(ChatComment_TextBox.Text, _currentSuperReplies);
+            ChatSays chat = new(ChatComment_TextBox.Text, _currentSuperReplies);
             var superReplyList = new SuperRepliesForm(this, chat);
             superReplyList.ShowDialog();
         }
@@ -1282,9 +1266,9 @@ namespace CustomStreamMaker
 
         private string GetSavedDirectory()
         {
-            if (string.IsNullOrEmpty(Properties.Settings.Default.CurrentDirectory))
-                return Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            return Properties.Settings.Default.CurrentDirectory;
+            return string.IsNullOrEmpty(Properties.Settings.Default.CurrentDirectory)
+                ? Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
+                : Properties.Settings.Default.CurrentDirectory;
         }
 
         private void SaveDirectoryToSettings(string directory)
@@ -1295,27 +1279,20 @@ namespace CustomStreamMaker
 
         private bool SaveExistingNSOStream()
         {
-            if (string.IsNullOrEmpty(_currentFile))
-            {
-                return SaveNewNSOStream();
-
-            }
-            return SaveNSOStreamToFile(_currentFile);
+            return string.IsNullOrEmpty(_currentFile) ? SaveNewNSOStream() : SaveNSOStreamToFile(_currentFile);
         }
 
         private bool SaveNewNSOStream()
         {
-            SaveFileDialog saveNsoStream = new SaveFileDialog();
-            saveNsoStream.InitialDirectory = GetSavedDirectory();
-            saveNsoStream.Filter = "JSON File (*.json)|*.json";
-            saveNsoStream.FilterIndex = 1;
-            saveNsoStream.RestoreDirectory = true;
-            saveNsoStream.OverwritePrompt = true;
-            if (saveNsoStream.ShowDialog() == DialogResult.OK)
+            SaveFileDialog saveNsoStream = new()
             {
-                return SaveNSOStreamToFile(saveNsoStream.FileName);
-            }
-            return false;
+                InitialDirectory = GetSavedDirectory(),
+                Filter = "JSON File (*.json)|*.json",
+                FilterIndex = 1,
+                RestoreDirectory = true,
+                OverwritePrompt = true
+            };
+            return saveNsoStream.ShowDialog() == DialogResult.OK && SaveNSOStreamToFile(saveNsoStream.FileName);
         }
         private bool SaveNSOStreamToFile(string filePath)
         {
@@ -1336,7 +1313,7 @@ namespace CustomStreamMaker
                     undoCountOnSave = _undoHistory.Count;
                     if (undoCountOnSave > 0)
                     {
-                        lastUndoObjOnSave = PlayingObject.DupePlayingObj(_undoHistory[_undoHistory.Count - 1].playingObject);
+                        lastUndoObjOnSave = PlayingObject.DupePlayingObj(_undoHistory[^1].playingObject);
                     }
                     ChangeMainFormName();
                     ChangeFileLabelIfUnsaved();
@@ -1354,34 +1331,33 @@ namespace CustomStreamMaker
 
         private bool LoadNSOStreamFromFile()
         {
-            OpenFileDialog openNsoStream = new OpenFileDialog();
-            openNsoStream.InitialDirectory = GetSavedDirectory();
-            openNsoStream.Filter = "JSON File (*.json)|*.json";
-            openNsoStream.FilterIndex = 1;
-            openNsoStream.RestoreDirectory = true;
+            OpenFileDialog openNsoStream = new()
+            {
+                InitialDirectory = GetSavedDirectory(),
+                Filter = "JSON File (*.json)|*.json",
+                FilterIndex = 1,
+                RestoreDirectory = true
+            };
             if (openNsoStream.ShowDialog() == DialogResult.OK)
             {
                 try
                 {
                     var fileContent = openNsoStream.OpenFile();
                     SaveDirectoryToSettings(Path.GetDirectoryName(openNsoStream.FileName));
-                    using (StreamReader reader = new StreamReader(fileContent))
-                    {
-                        var importedTreeData = reader.ReadToEnd();
-                        var jsonSettings = new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.All, Formatting = Formatting.Indented };
-                        var newTreeData = JsonConvert.DeserializeObject<StreamSettings>(importedTreeData, jsonSettings);
-                        savedSettings = JsonConvert.DeserializeObject<StreamSettings>(importedTreeData, jsonSettings);
-                        settings = newTreeData;
-                        CustomAssetExtractor.CheckForMissingFilesInSettings(ref settings);
-                        _currentFile = openNsoStream.FileName;
-                        _undoHistory.Clear();
-                        _redoHistory.Clear();
-                        SyncExportedSettings();
-                        ChangeMainFormName();
-                        ChangeFileLabelIfUnsaved();
-                        openNsoStream.Dispose();
-                        return true;
-                    }
+                    using StreamReader reader = new(fileContent);
+                    var importedTreeData = reader.ReadToEnd();
+                    var jsonSettings = new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.All, Formatting = Formatting.Indented };
+                    var newTreeData = JsonConvert.DeserializeObject<StreamSettings>(importedTreeData, jsonSettings);
+                    savedSettings = JsonConvert.DeserializeObject<StreamSettings>(importedTreeData, jsonSettings);
+                    settings = newTreeData;
+                    CustomAssetExtractor.CheckForMissingFilesInSettings(ref settings);
+                    _currentFile = openNsoStream.FileName;
+                    _undoHistory.Clear();
+                    _redoHistory.Clear();
+                    SyncExportedSettings();
+                    ChangeMainFormName();
+                    ChangeFileLabelIfUnsaved();
+                    return true;
                 }
                 catch { MessageBox.Show("Could not open JSON file, either the JSON file is invalid or the JSON file does not represent a Custom Stream.", "Could not read JSON file", MessageBoxButtons.OK, MessageBoxIcon.Error); }
             }
@@ -1390,9 +1366,7 @@ namespace CustomStreamMaker
 
         private void ChangeMainFormName()
         {
-            if (string.IsNullOrEmpty(_currentFile))
-                Text = "Custom Stream Maker";
-            else Text = $"Custom Stream Maker - {Path.GetFileName(_currentFile)}";
+            Text = string.IsNullOrEmpty(_currentFile) ? "Custom Stream Maker" : $"Custom Stream Maker - {Path.GetFileName(_currentFile)}";
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1686,7 +1660,7 @@ namespace CustomStreamMaker
 
         private void UseEditHistory(List<EditHistory> listToUse, List<EditHistory> listToEdit)
         {
-            for (int i = listToUse.Count - 1; i >= 0; i--)
+            for (int i = listToUse.Count - 1; i >= 0;)
             {
                 EditType redoType = listToUse[i].EditType;
                 switch (redoType)
@@ -1743,7 +1717,7 @@ namespace CustomStreamMaker
 
         private void undoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (ActiveControl != null && ActiveControl is TextBoxBase)
+            if (ActiveControl is not null and TextBoxBase)
             {
                 (ActiveControl as TextBoxBase).Undo();
                 return;
@@ -1753,7 +1727,7 @@ namespace CustomStreamMaker
 
         private void redoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (ActiveControl != null && ActiveControl is TextBoxBase)
+            if (ActiveControl is not null and TextBoxBase)
             {
                 (ActiveControl as TextBoxBase).Undo();
                 return;
@@ -1763,21 +1737,15 @@ namespace CustomStreamMaker
 
         internal void ChangeFileLabelIfUnsaved()
         {
-            if (!CheckIfSaved())
-                fileToolStripMenuItem.Text = "File*";
-            else fileToolStripMenuItem.Text = "File";
+            fileToolStripMenuItem.Text = !CheckIfSaved() ? "文件*" : "文件";
         }
 
         private void EditMenuStrip_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
             var data = Clipboard.GetDataObject();
             bool isSelected = (ActiveControl != null && ActiveControl is TextBoxBase && (ActiveControl as TextBoxBase).SelectedText != null) || StreamPlayingList.SelectedRows.Count > 0;
-            if (!(_undoHistory.Count > 0 || (ActiveControl != null && ActiveControl is TextBoxBase)))
-                undoToolStripMenuItem1.Enabled = false;
-            else undoToolStripMenuItem1.Enabled = true;
-            if (!(_redoHistory.Count > 0 || (ActiveControl != null && ActiveControl is TextBoxBase)))
-                redoToolStripMenuItem1.Enabled = false;
-            else redoToolStripMenuItem1.Enabled = true;
+            undoToolStripMenuItem1.Enabled = _undoHistory.Count > 0 || (ActiveControl != null && ActiveControl is TextBoxBase);
+            redoToolStripMenuItem1.Enabled = _redoHistory.Count > 0 || (ActiveControl != null && ActiveControl is TextBoxBase);
             if (isSelected)
             {
                 cutToolStripMenuItem1.Enabled = true;
@@ -1788,17 +1756,11 @@ namespace CustomStreamMaker
                 cutToolStripMenuItem1.Enabled = false;
                 copyToolStripMenuItem.Enabled = false;
             }
-            if (ActiveControl != null && ActiveControl is TextBoxBase && Clipboard.ContainsText() || (data != null && CheckClipboardForPlayingObj()))
-                pasteToolStripMenuItem.Enabled = true;
-            else pasteToolStripMenuItem.Enabled = false;
+            pasteToolStripMenuItem.Enabled = (ActiveControl != null && ActiveControl is TextBoxBase && Clipboard.ContainsText()) || (data != null && CheckClipboardForPlayingObj());
             if (StreamPlayingList.SelectedRows.Count > 0)
             {
-                if (StreamPlayingList.SelectedRows[0].Index > 0)
-                    moveSelectionUpToolStripMenuItem1.Enabled = true;
-                else moveSelectionUpToolStripMenuItem1.Enabled = false;
-                if (StreamPlayingList.SelectedRows[0].Index < settings.PlayingList.Count - 1)
-                    moveSelectionDownToolStripMenuItem1.Enabled = true;
-                else moveSelectionDownToolStripMenuItem1.Enabled = false;
+                moveSelectionUpToolStripMenuItem1.Enabled = StreamPlayingList.SelectedRows[0].Index > 0;
+                moveSelectionDownToolStripMenuItem1.Enabled = StreamPlayingList.SelectedRows[0].Index < settings.PlayingList.Count - 1;
                 if (data != null && CheckClipboardForPlayingObj())
                 {
                     pasteNewAboveSelectionToolStripMenuItem.Enabled = true;
@@ -1855,23 +1817,15 @@ namespace CustomStreamMaker
         {
             var isSaved = CheckIfSaved();
             if (isSaved) return DialogResult.Yes;
-            var confirm = MessageBox.Show("You currently have unsaved changes! Save custom stream?", "Save?", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
-            if (confirm == DialogResult.Yes)
-            {
-                return SaveExistingNSOStream() ? DialogResult.Yes : DialogResult.Cancel;
-            }
-            return confirm;
+            var confirm = MessageBox.Show("您当前有未保存的更改！保存自定义直播？", "Save?", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+            return confirm == DialogResult.Yes ? SaveExistingNSOStream() ? DialogResult.Yes : DialogResult.Cancel : confirm;
         }
         private bool MustSaveIfUnsaved()
         {
             var isSaved = CheckIfSaved();
             if (isSaved) return true;
-            var confirm = MessageBox.Show("You currently have unsaved changes! Save custom stream?", "Save?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if (confirm == DialogResult.Yes)
-            {
-                return SaveExistingNSOStream();
-            }
-            return false;
+            var confirm = MessageBox.Show("您当前有未保存的更改！保存自定义直播？", "Save?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            return confirm == DialogResult.Yes && SaveExistingNSOStream();
         }
         private bool CheckIfSaved()
         {
@@ -1907,15 +1861,9 @@ namespace CustomStreamMaker
                 return false;
             if (savedSettings.HasCustomDay != settings.HasCustomDay)
                 return false;
-            if (savedSettings.HasCustomDay && savedSettings.CustomDay != settings.CustomDay)
-                return false;
-            if (savedSettings.IsInvertedColors != settings.IsInvertedColors)
-                return false;
-            if (savedSettings.isBordersOff != settings.isBordersOff)
-                return false;
-            if (savedSettings.hasEndScreen != settings.hasEndScreen)
-                return false;
-            return true;
+            return (!savedSettings.HasCustomDay || savedSettings.CustomDay == settings.CustomDay)
+&& savedSettings.IsInvertedColors == settings.IsInvertedColors
+&& savedSettings.isBordersOff == settings.isBordersOff && savedSettings.hasEndScreen == settings.hasEndScreen;
         }
 
         private void loadCurrentStreamToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1948,11 +1896,13 @@ namespace CustomStreamMaker
 
         private void loadSavedStreamToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openNsoStream = new OpenFileDialog();
-            openNsoStream.InitialDirectory = GetSavedDirectory();
-            openNsoStream.Filter = "JSON File (*.json)|*.json";
-            openNsoStream.FilterIndex = 1;
-            openNsoStream.RestoreDirectory = true;
+            OpenFileDialog openNsoStream = new()
+            {
+                InitialDirectory = GetSavedDirectory(),
+                Filter = "JSON File (*.json)|*.json",
+                FilterIndex = 1,
+                RestoreDirectory = true
+            };
             if (openNsoStream.ShowDialog() == DialogResult.OK)
             {
                 try
@@ -1971,7 +1921,7 @@ namespace CustomStreamMaker
                 this.customAssetPreview.Focus();
                 return;
             }
-            CustomAssetPreview customAssetPreview = new CustomAssetPreview(this);
+            CustomAssetPreview customAssetPreview = new(this);
             this.customAssetPreview = customAssetPreview;
             customAssetPreview.Show();
         }
@@ -1979,61 +1929,43 @@ namespace CustomStreamMaker
         private void createBackgroundFromImageToolStripMenuItem_Click(object sender, EventArgs e)
         {
             CustomAssetExtractor.ImportImage();
-            if (this.customAssetPreview != null)
-            {
-                customAssetPreview.ReloadAssetListView();
-            }
+            customAssetPreview?.ReloadAssetListView();
         }
 
         private void createAnimationFromAssetBundlelz4ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             CustomAssetExtractor.ImportSpriteFromAssetBundle(true);
-            if (this.customAssetPreview != null)
-            {
-                customAssetPreview.ReloadAssetListView();
-            }
+            customAssetPreview?.ReloadAssetListView();
         }
 
         private void createAnimationFromAssetBundlelToolStripMenuItem_Click(object sender, EventArgs e)
         {
             CustomAssetExtractor.ImportSpriteFromAssetBundle(false);
-            if (this.customAssetPreview != null)
-            {
-                customAssetPreview.ReloadAssetListView();
-            }
+            customAssetPreview?.ReloadAssetListView();
         }
 
         private void createAnimationFromAddressableBundlelz4ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             CustomAssetExtractor.ImportSpriteFromAddressable(true);
-            if (this.customAssetPreview != null)
-            {
-                customAssetPreview.ReloadAssetListView();
-            }
+            customAssetPreview?.ReloadAssetListView();
         }
 
         private void createAnimationFromAddressableBundlelzmaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             CustomAssetExtractor.ImportSpriteFromAddressable(false);
-            if (this.customAssetPreview != null)
-            {
-                customAssetPreview.ReloadAssetListView();
-            }
+            customAssetPreview?.ReloadAssetListView();
         }
 
         private void initializeAddressableCatalogToolStripMenuItem_Click(object sender, EventArgs e)
         {
             CustomAssetExtractor.InitializeCatalogPath();
             CheckUnvalidCustomAssets();
-            if (this.customAssetPreview != null)
-            {
-                customAssetPreview.ReloadAssetListView();
-            }
+            customAssetPreview?.ReloadAssetListView();
         }
 
         internal void CheckUnvalidCustomAssets()
         {
-            bool isCustomBackNull = (settings.CustomBackground == null && settings.StartingBackground == StreamBackground.None);
+            bool isCustomBackNull = settings.CustomBackground == null && settings.StartingBackground == StreamBackground.None;
             if (settings.StartingBackground == StreamBackground.None && (isCustomBackNull || CustomAssetExtractor.customAssets.Count == 0 || !CustomAssetExtractor.customAssets.Exists(a => CustomAsset.IsCustomAssetTheSame(a, settings.CustomBackground))))
             {
                 settings.CustomBackground = null;
@@ -2054,7 +1986,7 @@ namespace CustomStreamMaker
             for (int i = 0; i < settings.PlayingList.Count; i++)
             {
                 var playObj = settings.PlayingList[i];
-                if (playObj.PlayingType == PlayingType.KAngelSays || playObj.PlayingType == PlayingType.KAngelCallout)
+                if (playObj.PlayingType is PlayingType.KAngelSays or PlayingType.KAngelCallout)
                 {
                     var kObj = playObj as KAngelSays;
                     if (animList.Contains(kObj.AnimName))
@@ -2111,20 +2043,14 @@ namespace CustomStreamMaker
 
         private void importCachedAnimationClipsToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-            CachedAnimationClips cachedAnimationClips = new CachedAnimationClips();
+            CachedAnimationClips cachedAnimationClips = new();
             cachedAnimationClips.ShowDialog();
         }
 
         private void assetsToolStripMenuItem_DropDownOpening(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(CustomAssetExtractor.catalogPath))
-            {
-                initializeAddressableCatalogToolStripMenuItem.CheckState = CheckState.Unchecked;
-            }
-            else initializeAddressableCatalogToolStripMenuItem.CheckState = CheckState.Checked;
-            if (!CustomAssetExtractor.customAssets.Exists(a => a.filePath == "" || a.filePath.Contains("?")))
-                fixAnyMissingToolStripMenuItem.Enabled = false;
-            else fixAnyMissingToolStripMenuItem.Enabled = true;
+            initializeAddressableCatalogToolStripMenuItem.CheckState = string.IsNullOrEmpty(CustomAssetExtractor.catalogPath) ? CheckState.Unchecked : CheckState.Checked;
+            fixAnyMissingToolStripMenuItem.Enabled = CustomAssetExtractor.customAssets.Exists(a => a.filePath == "" || a.filePath.Contains("?"));
         }
 
         private void ExitControl(object sender, PreviewKeyDownEventArgs e)

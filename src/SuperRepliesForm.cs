@@ -7,9 +7,9 @@ namespace CustomStreamMaker
 {
     public partial class SuperRepliesForm : Form
     {
-        StreamEditor streamEditor;
-        ChatSays chatComment;
-        internal List<KAngelSays> kAngelSaysDupe = new();
+        readonly StreamEditor streamEditor;
+        readonly ChatSays chatComment;
+        internal List<KAngelSays> kAngelSaysDupe = [];
         string _currentAnim = "";
         public SuperRepliesForm(StreamEditor streamEditor, ChatSays chat)
         {
@@ -29,7 +29,7 @@ namespace CustomStreamMaker
             SuperRepliesListView.CurrentCell = null;
             if (SuperRepliesListView.SelectedRows.Count > 0)
             {
-                AddEditSuperReply_Button.Text = "Save Reply";
+                AddEditSuperReply_Button.Text = "保存回复";
             }
             CheckIfAtReplyLimit();
 
@@ -162,18 +162,17 @@ namespace CustomStreamMaker
                 var index = SuperRepliesListView.SelectedRows[0].Index;
                 KAnimReply_List.SelectedItem = kAngelSaysDupe[index].AnimName;
                 KAngelReply_Text.Text = kAngelSaysDupe[index].Dialogue;
-                AddEditSuperReply_Button.Text = "Save Reply";
+                AddEditSuperReply_Button.Text = "保存回复";
                 return;
             }
-            AddEditSuperReply_Button.Text = "Add Reply";
+            AddEditSuperReply_Button.Text = "添加回复";
             CheckIfAtReplyLimit();
         }
 
         private void SuperRepliesForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             var firstReply = new KAngelSays(streamEditor._currentSuperReplies[0].AnimName, streamEditor._currentSuperReplies[0].Dialogue, streamEditor._currentSuperReplies[0].customAnim);
-            streamEditor._currentSuperReplies = new List<KAngelSays>() { firstReply };
-            streamEditor._currentSuperReplies.AddRange(kAngelSaysDupe);
+            streamEditor._currentSuperReplies = [firstReply, .. kAngelSaysDupe];
             streamEditor.ChangeFileLabelIfUnsaved();
             Dispose();
         }
@@ -190,9 +189,7 @@ namespace CustomStreamMaker
 
         private void CheckIfAtReplyLimit()
         {
-            if (kAngelSaysDupe.Count >= 3 && SuperRepliesListView.SelectedRows.Count == 0)
-                AddEditSuperReply_Button.Enabled = false;
-            else AddEditSuperReply_Button.Enabled = true;
+            AddEditSuperReply_Button.Enabled = kAngelSaysDupe.Count < 3 || SuperRepliesListView.SelectedRows.Count != 0;
         }
 
         private void KAnimReply_List_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)

@@ -50,8 +50,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(311, 59);
             this.label1.TabIndex = 1;
-            this.label1.Text = "These Animation Clips have been found in the asset bundle.\r\n\r\nSelect which ones y" +
-    "ou want to include from the list below\r\n.\r\n\r\n";
+            this.label1.Text = "已在Asset Bundle中找到这些动画.\r\n\r\n从下面的列表中选择你需要的\r\n.\r\n\r\n";
             // 
             // AnimationClipConfirm
             // 
@@ -77,7 +76,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AnimationClipList";
-            this.Text = "Animation Clips";
+            this.Text = "动画列表";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AnimationClipList_FormClosing);
             this.Load += new System.EventHandler(this.AnimationClipList_Load);
             this.ResumeLayout(false);

@@ -13,7 +13,7 @@ namespace CustomStreamMaker
             InitializeComponent();
         }
 
-        private async void AssetLoadWindow_Load(object sender, EventArgs e)
+        private void AssetLoadWindow_Load(object sender, EventArgs e)
         {
 
         }
@@ -32,8 +32,8 @@ namespace CustomStreamMaker
             await Task.Run(AssetExtractor.CacheSprites);
             progress.Report(100);
             await Task.Run(AssetExtractor.CacheAudio);
-            bool isAllCachedToMemory = AssetExtractor.SaveToMemory && (AssetExtractor.CachedBackgrounds.Count < 12 || AssetExtractor.CachedSprites.Count < 352 || AssetExtractor.CachedMusic.Count < 128);
-            bool isAllCachedToFiles = !AssetExtractor.SaveToMemory && (Directory.GetFiles(AssetExtractor.BackgroundDirectory).Length < 12 || Directory.GetFiles(AssetExtractor.SpriteDirectory).Length < 352 || Directory.GetFiles(AssetExtractor.AudioDirectory).Length < 128);
+            bool isAllCachedToMemory = AssetExtractor.SaveToMemory && (AssetExtractor.CachedBackgrounds.Count < 12 || AssetExtractor.CachedSprites.Count < 347 || AssetExtractor.CachedMusic.Count < 128);
+            bool isAllCachedToFiles = !AssetExtractor.SaveToMemory && (Directory.GetFiles(AssetExtractor.BackgroundDirectory).Length < 12 || Directory.GetFiles(AssetExtractor.SpriteDirectory).Length < 347 || Directory.GetFiles(AssetExtractor.AudioDirectory).Length < 128);
             if (isAllCachedToMemory || isAllCachedToFiles)
             {
                 MessageBox.Show("Some assets were either not loaded properly or are missing. Previews of these broken assets are disabled.", "Error");

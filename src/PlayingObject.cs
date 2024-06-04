@@ -109,10 +109,12 @@ namespace CustomStreamMaker
                 case PlayingType.KAngelSays:
                 case PlayingType.KAngelCallout:
                     var kOriginal = obj as KAngelSays;
-                    var kDupe = new KAngelSays();
-                    kDupe.PlayingType = kOriginal.PlayingType;
-                    kDupe.AnimName = kOriginal.AnimName;
-                    kDupe.Dialogue = kOriginal.Dialogue;
+                    var kDupe = new KAngelSays
+                    {
+                        PlayingType = kOriginal.PlayingType,
+                        AnimName = kOriginal.AnimName,
+                        Dialogue = kOriginal.Dialogue
+                    };
                     kDupe.SetCustomAnim(kOriginal.customAnim);
                     if (kDupe.PlayingType == PlayingType.KAngelCallout)
                     {
@@ -124,12 +126,14 @@ namespace CustomStreamMaker
                 case PlayingType.ChatSuper:
                 case PlayingType.ChatBad:
                     var chatOriginal = obj as ChatSays;
-                    var chatDupe = new ChatSays();
-                    chatDupe.PlayingType = chatOriginal.PlayingType;
-                    chatDupe.Comment = chatOriginal.Comment;
+                    var chatDupe = new ChatSays
+                    {
+                        PlayingType = chatOriginal.PlayingType,
+                        Comment = chatOriginal.Comment
+                    };
                     if (chatDupe.PlayingType == PlayingType.ChatSuper)
                     {
-                        List<KAngelSays> dupeList = new();
+                        List<KAngelSays> dupeList = [];
                         for (int i = 0; i < chatOriginal.Replies.Count; i++)
                         {
                             var kReplyRef = chatOriginal.Replies[i];
@@ -165,7 +169,7 @@ namespace CustomStreamMaker
     [Serializable]
     public class KAngelSays : PlayingObject
     {
-        public override PlayingType PlayingType { get => PlayingType.KAngelSays; }
+        public override PlayingType PlayingType => PlayingType.KAngelSays;
 
         public bool IsCustomAnim;
         public CustomAsset customAnim;
@@ -191,10 +195,12 @@ namespace CustomStreamMaker
         {
             if (customAnimFile != null)
             {
-                customAnim = new(CustomAssetType.Sprite, customAnimFile.customAssetFileType, customAnimFile.fileName, customAnimFile.filePath);
-                customAnim.picWidth = customAnimFile.picWidth;
-                customAnim.picHeight = customAnimFile.picHeight;
-                customAnim.catalogPath = customAnimFile.catalogPath;
+                customAnim = new(CustomAssetType.Sprite, customAnimFile.customAssetFileType, customAnimFile.fileName, customAnimFile.filePath)
+                {
+                    picWidth = customAnimFile.picWidth,
+                    picHeight = customAnimFile.picHeight,
+                    catalogPath = customAnimFile.catalogPath
+                };
                 return;
             }
             customAnim = null;
@@ -204,7 +210,7 @@ namespace CustomStreamMaker
     [Serializable]
     public class KAngelCallout : KAngelSays
     {
-        public override PlayingType PlayingType { get => PlayingType.KAngelCallout; }
+        public override PlayingType PlayingType => PlayingType.KAngelCallout;
 
         public string HaterComment;
 
@@ -295,7 +301,7 @@ namespace CustomStreamMaker
     [Serializable]
     public class PlayEffect : PlayingObject
     {
-        public override PlayingType PlayingType { get => PlayingType.PlayEffect; }
+        public override PlayingType PlayingType => PlayingType.PlayEffect;
         public ChanceEffectType BorderEffect;
         public BorderEffectType BorderEffectType;
 

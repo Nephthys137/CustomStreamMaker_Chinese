@@ -6,7 +6,7 @@ namespace CustomStreamMaker
 {
     public partial class CachedAnimationClips : Form
     {
-        string customPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\CustomStreamMaker\CustomAnimationClips";
+        readonly string customPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\CustomStreamMaker\CustomAnimationClips";
         public CachedAnimationClips()
         {
             InitializeComponent();

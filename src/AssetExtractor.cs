@@ -42,7 +42,6 @@ using SixLabors.ImageSharp.Processing;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 
 namespace CustomStreamMaker
 {
@@ -54,33 +53,27 @@ namespace CustomStreamMaker
         public static string SpriteDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\CustomStreamMaker\CachedSprites";
         public static string AudioDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\CustomStreamMaker\CachedAudio";
 
-        public static Dictionary<string, SixLabors.ImageSharp.Image> CachedBackgrounds = new();
-        public static Dictionary<string, SixLabors.ImageSharp.Image> CachedSprites = new();
-        public static Dictionary<string, (byte[], int)> CachedMusic = new();
+        public static Dictionary<string, Image> CachedBackgrounds = [];
+        public static Dictionary<string, Image> CachedSprites = [];
+        public static Dictionary<string, (byte[], int)> CachedMusic = [];
 
         public static string GetAddressablesPath()
         {
             var gamePath = GameLocation.InitializeValidGamePath();
-            if (!Directory.Exists(gamePath + @"\Windose_Data\StreamingAssets\aa\StandaloneWindows64"))
-                return null;
-            if (string.IsNullOrEmpty(gamePath))
-                return null;
-            return gamePath + @"\Windose_Data\StreamingAssets\aa\StandaloneWindows64";
+            return !Directory.Exists(gamePath + @"\Windose_Data\StreamingAssets\aa\StandaloneWindows64")
+                ? null
+                : string.IsNullOrEmpty(gamePath) ? null : gamePath + @"\Windose_Data\StreamingAssets\aa\StandaloneWindows64";
         }
 
         public static string GetGameDataPath()
         {
             var gamePath = GameLocation.InitializeValidGamePath();
-            if (!Directory.Exists(gamePath))
-                return null;
-            if (string.IsNullOrEmpty(gamePath))
-                return null;
-            return gamePath + @"\Windose_Data";
+            return !Directory.Exists(gamePath) ? null : string.IsNullOrEmpty(gamePath) ? null : gamePath + @"\Windose_Data";
         }
 
         public static System.Drawing.Image GetCachedBackground(string bgName)
         {
-            SixLabors.ImageSharp.Image image = null;
+            Image image = null;
             if (!SaveToMemory)
             {
                 try
@@ -104,17 +97,14 @@ namespace CustomStreamMaker
                 return null;
             if (image == null)
                 return null;
-            using (MemoryStream ms = new MemoryStream())
-            {
-                image.SaveAsPng(ms);
-                return System.Drawing.Image.FromStream(ms);
-
-            }
+            using MemoryStream ms = new();
+            image.SaveAsPng(ms);
+            return System.Drawing.Image.FromStream(ms);
         }
 
         public static System.Drawing.Image GetCachedSprite(string bgName)
         {
-            SixLabors.ImageSharp.Image image = null;
+            Image image = null;
             if (!SaveToMemory)
             {
                 try
@@ -144,11 +134,9 @@ namespace CustomStreamMaker
                 return null;
             if (image == null)
                 return null;
-            using (MemoryStream ms = new MemoryStream())
-            {
-                image.SaveAsPng(ms);
-                return System.Drawing.Image.FromStream(ms);
-            }
+            using MemoryStream ms = new();
+            image.SaveAsPng(ms);
+            return System.Drawing.Image.FromStream(ms);
         }
         public static WaveOut GetCachedAudio(string audioName)
         {
@@ -162,13 +150,10 @@ namespace CustomStreamMaker
             if (!SaveToMemory)
                 filePath = GetProperFile();
             if (SaveToMemory && CachedMusic.Count == 0) return null;
-            if (SaveToMemory && !CachedMusic.TryGetValue(audioName, out var _))
+            if (SaveToMemory && !CachedMusic.TryGetValue(audioName, out _))
                 return null;
             WaveFormat waveFormat = new();
-            byte[] musicData;
-            if (SaveToMemory)
-                musicData = CachedMusic[audioName].Item1;
-            else musicData = File.ReadAllBytes(filePath);
+            byte[] musicData = SaveToMemory ? CachedMusic[audioName].Item1 : File.ReadAllBytes(filePath);
             if (musicData == null || musicData.Length == 0)
                 return null;
             int compressionFormat;
@@ -185,26 +170,26 @@ namespace CustomStreamMaker
             if (compressionFormat == 1)
             {
                 help = FsbLoader.LoadFsbFromByteArray(musicData);
-                help.Samples[0].RebuildAsStandardFileFormat(out byte[] itWorks, out string ex);
+                help.Samples[0].RebuildAsStandardFileFormat(out byte[] itWorks, out _);
                 vorbData = itWorks;
             }
             Console.WriteLine(audioName);
 
-            using (RawSourceWaveStream ws = new RawSourceWaveStream(vorbData != null ? vorbData : musicData, 0, vorbData != null ? vorbData.Length : musicData.Length, waveFormat))
+            using RawSourceWaveStream ws = new(vorbData ?? musicData, 0, vorbData != null ? vorbData.Length : musicData.Length, waveFormat);
+            WaveStream test;
+            if (compressionFormat == 0)
+                test = WaveFormatConversionStream.CreatePcmStream(ws);
+            else
             {
-                WaveStream test;
-                if (compressionFormat == 0)
-                    test = WaveFormatConversionStream.CreatePcmStream(ws);
-                else
-                {
-                    MemoryStream ms = new MemoryStream(vorbData);
-                    test = new VorbisWaveReader(ms);
-                }
-                var output = new WaveOut();
-                output.Volume = 0.2f;
-                output.Init(test);
-                return output;
+                MemoryStream ms = new(vorbData);
+                test = new VorbisWaveReader(ms);
             }
+            var output = new WaveOut
+            {
+                Volume = 0.2f
+            };
+            output.Init(test);
+            return output;
 
             string GetProperFile()
             {
@@ -219,7 +204,7 @@ namespace CustomStreamMaker
 
         public static void CacheAudio()
         {
-            List<string> s = Enum.GetNames(typeof(SoundType)).ToList();
+            List<string> s = [.. Enum.GetNames(typeof(SoundType))];
             byte[] resourceData = null;
             var filePath = "";
             var gameDataPath = GetGameDataPath();
@@ -241,60 +226,56 @@ namespace CustomStreamMaker
             var am = new AssetsManager();
 
             var assInst = am.LoadAssetsFile(filePath, true);
-            using (Stream stream = new MemoryStream(Properties.Resources.lz4))
+            using Stream stream = new MemoryStream(Properties.Resources.lz4);
+            am.LoadClassPackage(stream);
+            am.LoadClassDatabaseFromPackage(assInst.file.Metadata.UnityVersion);
+            foreach (var info in assInst.file.GetAssetsOfType(AssetClassID.AudioClip))
             {
-                am.LoadClassPackage(stream);
-                am.LoadClassDatabaseFromPackage(assInst.file.Metadata.UnityVersion);
-                foreach (var info in assInst.file.GetAssetsOfType(AssetClassID.AudioClip))
+                var audio = am.GetBaseField(assInst, info);
+                if (s.Contains("BGM_" + audio["m_Name"].AsString) || s.Contains("SE_" + audio["m_Name"].AsString))
                 {
-                    var audio = am.GetBaseField(assInst, info);
-                    if (s.Contains("BGM_" + audio["m_Name"].AsString) || s.Contains("SE_" + audio["m_Name"].AsString))
+                    var offset = audio["m_Resource"].Get("m_Offset").AsInt;
+                    var size = audio["m_Resource"].Get("m_Size").AsInt;
+                    var compressionFormat = audio["m_CompressionFormat"].AsInt;
+                    byte[] audioData = ReadResourcesFile(offset, size);
+                    if (SaveToMemory)
                     {
-                        var offset = audio["m_Resource"].Get("m_Offset").AsInt;
-                        var size = audio["m_Resource"].Get("m_Size").AsInt;
-                        var compressionFormat = audio["m_CompressionFormat"].AsInt;
-                        byte[] audioData = ReadResourcesFile(offset, size);
-                        if (SaveToMemory)
+                        try
                         {
-                            try
-                            {
-                                CachedMusic.Add(audio["m_Name"].AsString, new(audioData, compressionFormat));
-                            }
-                            catch (ArgumentException) { continue; }
+                            CachedMusic.Add(audio["m_Name"].AsString, new(audioData, compressionFormat));
                         }
-                        else
-                        {
-                            try
-                            {
-                                using (var file = File.Create(AudioDirectory + @"\" + audio["m_Name"].AsString + $"-{compressionFormat}"))
-                                {
-                                    file.Write(audioData, 0, audioData.Length);
-                                    file.Dispose();
-                                }
-                            }
-                            catch (ArgumentException) { continue; }
-                        }
-
+                        catch (ArgumentException) { continue; }
                     }
+                    else
+                    {
+                        try
+                        {
+                            using var file = File.Create(AudioDirectory + @"\" + audio["m_Name"].AsString + $"-{compressionFormat}");
+                            file.Write(audioData, 0, audioData.Length);
+                            file.Dispose();
+                        }
+                        catch (ArgumentException) { continue; }
+                    }
+
                 }
             }
 
             byte[] ReadResourcesFile(int offset, int size)
             {
-                List<byte> b = new();
+                List<byte> b = [];
                 int limit = 0;
                 for (int i = offset; limit < size; i++)
                 {
                     limit++;
                     b.Add(resourceData[i]);
                 }
-                return b.ToArray();
+                return [.. b];
             }
 
         }
         public static void CacheBackgrounds()
         {
-            List<string> s = new() {
+            List<string> s = [
                     "bg_stream",
                     "bg_stream_shield_silver",
                     "bg_stream_shield_gold",
@@ -307,7 +288,7 @@ namespace CustomStreamMaker
                     "bg_stream_horror",
                     "bg_stream_mansion",
                     "bg_stream_sayonara_002"
-                };
+                ];
             var filePath = "";
             var addressablesPath = GetAddressablesPath();
             if (string.IsNullOrEmpty(addressablesPath))
@@ -345,32 +326,30 @@ namespace CustomStreamMaker
                     }
                     else
                     {
-                        using (var file = File.Create(BackgroundDirectory + @"\" + picName))
-                        {
-                            file.Write(texDat, 0, texDat.Length);
-                            file.Dispose();
-                        }
+                        using var file = File.Create(BackgroundDirectory + @"\" + picName);
+                        file.Write(texDat, 0, texDat.Length);
+                        file.Dispose();
                     }
                 }
             }
         }
 
-        private static SixLabors.ImageSharp.Image TextureConverter(byte[] texDat, TextureFile tf)
+        private static Image TextureConverter(byte[] texDat, TextureFile tf)
         {
             return TextureConverter(texDat, tf.m_Width, tf.m_Height);
         }
-        private static SixLabors.ImageSharp.Image TextureConverter(byte[] texDat)
+        private static Image TextureConverter(byte[] texDat)
         {
             if (texDat != null && texDat.Length > 0)
             {
-                SixLabors.ImageSharp.Image test;
+                Image test;
                 test = SixLabors.ImageSharp.Image.Load<Bgra32>(texDat);
                 test.Mutate(i => i.Flip(FlipMode.Vertical));
                 return test;
             }
             return null;
         }
-        private static SixLabors.ImageSharp.Image TextureConverter(byte[] texDat, int width, int height, bool autoDoubleHeight = true)
+        private static Image TextureConverter(byte[] texDat, int width, int height, bool autoDoubleHeight = true)
         {
             if (texDat != null && texDat.Length > 0)
             {
@@ -381,7 +360,7 @@ namespace CustomStreamMaker
                     width *= 2;
                     height *= 2;
                 }
-                SixLabors.ImageSharp.Image test;
+                Image test;
                 test = SixLabors.ImageSharp.Image.LoadPixelData<Bgra32>(texDat, width, height);
                 test.Mutate(i => i.Flip(FlipMode.Vertical));
                 return test;
@@ -463,7 +442,7 @@ namespace CustomStreamMaker
 
             }
 
-            SixLabors.ImageSharp.Image SpriteGetter()
+            Image SpriteGetter()
             {
                 var am = new AssetsManager();
 
@@ -471,7 +450,7 @@ namespace CustomStreamMaker
                 var assetInst = am.LoadAssetsFileFromBundle(bunInst, 0, true);
 
                 var hmm = assetInst.file.GetAssetsOfType((int)AssetClassID.Texture2D);
-                var abInfo = hmm.Count > 1 ? hmm[hmm.Count - 2] : hmm[0];
+                var abInfo = hmm.Count > 1 ? hmm[^2] : hmm[0];
 
                 var why = am.GetBaseField(assetInst, abInfo);
 
@@ -482,10 +461,8 @@ namespace CustomStreamMaker
                     return TextureConverter(texDat, tf);
                 else
                 {
-                    using (var file = File.Create(SpriteDirectory + @"\" + ThatOneLongListOfAnimationsOriginallyInTheGame.list[spriteIndex]))
-                    {
-                        file.Write(texDat, 0, texDat.Length);
-                    }
+                    using var file = File.Create(SpriteDirectory + @"\" + ThatOneLongListOfAnimationsOriginallyInTheGame.list[spriteIndex]);
+                    file.Write(texDat, 0, texDat.Length);
                     return null;
                 }
             }

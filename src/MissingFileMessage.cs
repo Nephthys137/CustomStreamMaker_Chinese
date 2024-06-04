@@ -17,15 +17,12 @@ namespace CustomStreamMaker
 
         private string LoadFileType()
         {
-            switch (missing.customAssetFileType)
+            return missing.customAssetFileType switch
             {
-                case CustomAssetFileType.ImageFile:
-                    return "Image";
-                case CustomAssetFileType.AddressableBundle:
-                    return "Addressable Bundle";
-                default:
-                    return "Asset Bundle";
-            }
+                CustomAssetFileType.ImageFile => "Image",
+                CustomAssetFileType.AddressableBundle => "Addressable Bundle",
+                _ => "Asset Bundle",
+            };
         }
 
         private void MissingFileMessage_Load(object sender, EventArgs e)
@@ -54,11 +51,10 @@ namespace CustomStreamMaker
 
         private string OpenNewPath()
         {
-            OpenFileDialog openNsoStream = new OpenFileDialog();
-            string setDirectory;
-            if (missing.customAssetType == CustomAssetType.Background)
-                setDirectory = string.IsNullOrEmpty(Properties.Settings.Default.ImageDirectory) ? Environment.GetFolderPath(Environment.SpecialFolder.MyPictures) : Properties.Settings.Default.ImageDirectory;
-            else setDirectory = string.IsNullOrEmpty(Properties.Settings.Default.BundleDirectory) ? Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) : Properties.Settings.Default.BundleDirectory;
+            OpenFileDialog openNsoStream = new();
+            string setDirectory = missing.customAssetType == CustomAssetType.Background
+                ? string.IsNullOrEmpty(Properties.Settings.Default.ImageDirectory) ? Environment.GetFolderPath(Environment.SpecialFolder.MyPictures) : Properties.Settings.Default.ImageDirectory
+                : string.IsNullOrEmpty(Properties.Settings.Default.BundleDirectory) ? Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) : Properties.Settings.Default.BundleDirectory;
             openNsoStream.InitialDirectory = setDirectory;
             openNsoStream.Filter = missing.customAssetType == CustomAssetType.Background ? "png File (*.png)|*.png|jpg File (*.jpg)|*.jpg" : "All Files (*.*)|*.*";
             openNsoStream.FilterIndex = 1;

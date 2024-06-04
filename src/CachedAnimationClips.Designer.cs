@@ -49,7 +49,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(327, 43);
             this.label1.TabIndex = 2;
-            this.label1.Text = "\nSelect and delete which ones you want to exclude from importing.\r\n\r\n";
+            this.label1.Text = "\n删除选择的导入内容.\r\n\r\n";
             // 
             // OkButton
             // 
@@ -57,7 +57,7 @@
             this.OkButton.Name = "OkButton";
             this.OkButton.Size = new System.Drawing.Size(171, 34);
             this.OkButton.TabIndex = 1;
-            this.OkButton.Text = "OK";
+            this.OkButton.Text = "确认";
             this.OkButton.UseVisualStyleBackColor = true;
             this.OkButton.Click += new System.EventHandler(this.OkButton_Click);
             // 
@@ -67,7 +67,7 @@
             this.CancelButton.Name = "CancelButton";
             this.CancelButton.Size = new System.Drawing.Size(171, 34);
             this.CancelButton.TabIndex = 2;
-            this.CancelButton.Text = "Cancel";
+            this.CancelButton.Text = "取消";
             this.CancelButton.UseVisualStyleBackColor = true;
             this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
@@ -86,7 +86,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "CachedAnimationClips";
-            this.Text = "Cached Animation Clips";
+            this.Text = "缓存动画列表";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CachedAnimationClips_FormClosing);
             this.Load += new System.EventHandler(this.CachedAnimationClips_Load);
             this.ResumeLayout(false);
@@ -98,6 +98,6 @@
         private System.Windows.Forms.TreeView CachedAnimationsTreeView;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button OkButton;
-        private System.Windows.Forms.Button CancelButton;
+        private new System.Windows.Forms.Button CancelButton;
     }
 }

@@ -61,7 +61,7 @@ namespace CustomStreamMaker
         {
             this.customAssetType = customAssetType;
             this.customAssetFileType = customAssetFileType;
-            this.fileName = filename;
+            fileName = filename;
             this.filePath = filePath;
             if (customAssetFileType == CustomAssetFileType.AddressableBundle)
             {
@@ -77,15 +77,8 @@ namespace CustomStreamMaker
                 return false;
             if (asset1.fileName != asset2.fileName)
                 return false;
-            if (asset1.filePath != asset2.filePath)
-                return false;
-            if (asset1.catalogPath != asset2.catalogPath)
-                return false;
-            if (asset1.picWidth != asset2.picWidth)
-                return false;
-            if (asset1.picHeight != asset2.picHeight)
-                return false;
-            return true;
+            return asset1.filePath == asset2.filePath
+&& asset1.catalogPath == asset2.catalogPath && asset1.picWidth == asset2.picWidth && asset1.picHeight == asset2.picHeight;
         }
     }
 
@@ -101,7 +94,7 @@ namespace CustomStreamMaker
         internal const string VALID_CATALOG_STRING = @"""m_InstanceProviderData"":{""m_Id"":""UnityEngine.ResourceManagement.ResourceProviders.InstanceProvider"",""m_ObjectType"":{""m_AssemblyName"":""Unity.ResourceManager, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"",""m_ClassName"":""UnityEngine.ResourceManagement.ResourceProviders.InstanceProvider""},""m_Data"":""""},""m_SceneProviderData"":{""m_Id"":""UnityEngine.ResourceManagement.ResourceProviders.SceneProvider"",""m_ObjectType"":{""m_AssemblyName"":""Unity.ResourceManager, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"",""m_ClassName"":""UnityEngine.ResourceManagement.ResourceProviders.SceneProvider""},""m_Data"":""""},""m_ResourceProviderData"":[{""m_Id"":""UnityEngine.ResourceManagement.ResourceProviders.LegacyResourcesProvider"",""m_ObjectType"":{""m_AssemblyName"":""Unity.ResourceManager, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"",""m_ClassName"":""UnityEngine.ResourceManagement.ResourceProviders.LegacyResourcesProvider""},""m_Data"":""""},{""m_Id"":""UnityEngine.ResourceManagement.ResourceProviders.AssetBundleProvider"",""m_ObjectType"":{""m_AssemblyName"":""Unity.ResourceManager, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"",""m_ClassName"":""UnityEngine.ResourceManagement.ResourceProviders.AssetBundleProvider""},""m_Data"":""""},{""m_Id"":""UnityEngine.ResourceManagement.ResourceProviders.BundledAssetProvider"",""m_ObjectType"":{""m_AssemblyName"":""Unity.ResourceManager, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"",""m_ClassName"":""UnityEngine.ResourceManagement.ResourceProviders.BundledAssetProvider""},""m_Data"":""""},{""m_Id"":""UnityEngine.ResourceManagement.ResourceProviders.LegacyResourcesProvider"",""m_ObjectType"":{""m_AssemblyName"":""Unity.ResourceManager, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"",""m_ClassName"":""UnityEngine.ResourceManagement.ResourceProviders.LegacyResourcesProvider""},""m_Data"":""""},{""m_Id"":""UnityEngine.ResourceManagement.ResourceProviders.BundledAssetProvider"",""m_ObjectType"":{""m_AssemblyName"":""Unity.ResourceManager, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"",""m_ClassName"":""UnityEngine.ResourceManagement.ResourceProviders.BundledAssetProvider""},""m_Data"":""""}";
 
         internal static string cachedAnimPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\CustomStreamMaker\CustomAnimationClips";
-        internal static List<CustomAsset> customAssets = new();
+        internal static List<CustomAsset> customAssets = [];
         internal static string catalogPath = null;
 
         internal static void CheckForMissingFilesInSettings(ref StreamSettings settings)
@@ -173,15 +166,15 @@ namespace CustomStreamMaker
                         missingAssets.Add(asset);
                 }
                 SaveCustomAssets();
-                foreach (var path in pathsToSearch)
+                foreach (var (bundle, isAddressable) in pathsToSearch)
                 {
-                    List<string> clipNames = new();
-                    var selectedAssets = assetsToSync.FindAll(a => a.filePath == path.bundle && a.customAssetType == CustomAssetType.Sprite);
+                    List<string> clipNames = [];
+                    var selectedAssets = assetsToSync.FindAll(a => a.filePath == bundle && a.customAssetType == CustomAssetType.Sprite);
                     foreach (var asset in selectedAssets)
                     {
                         clipNames.Add(asset.fileName);
                     }
-                    ImportSelectedSpritesFromAssetBundle(path.bundle, clipNames, path.isAddressable);
+                    ImportSelectedSpritesFromAssetBundle(bundle, clipNames, isAddressable);
                 }
             }
 
@@ -233,10 +226,12 @@ namespace CustomStreamMaker
             if (asset == null) return;
             if (!string.IsNullOrEmpty(asset.filePath) && File.Exists(asset.filePath) && !customAssets.Exists(a => CustomAsset.IsCustomAssetTheSame(a, asset)))
             {
-                CustomAsset newAsset = new CustomAsset(asset.customAssetType, asset.customAssetFileType, asset.fileName, asset.filePath);
-                newAsset.catalogPath = asset.catalogPath;
-                newAsset.picWidth = asset.picWidth;
-                newAsset.picHeight = asset.picHeight;
+                CustomAsset newAsset = new(asset.customAssetType, asset.customAssetFileType, asset.fileName, asset.filePath)
+                {
+                    catalogPath = asset.catalogPath,
+                    picWidth = asset.picWidth,
+                    picHeight = asset.picHeight
+                };
                 if (asset.customAssetType == CustomAssetType.Sprite)
                     assetToAdd.Add(newAsset);
                 else customAssets.Add(newAsset);
@@ -279,10 +274,12 @@ namespace CustomStreamMaker
                         editedAsset.filePath = missingFileMessage.newPath;
                         if (!customAssets.Exists(a => a.fileName == editedAsset.fileName))
                         {
-                            CustomAsset newAsset = new CustomAsset(asset.customAssetType, asset.customAssetFileType, asset.fileName, asset.filePath);
-                            newAsset.catalogPath = asset.catalogPath;
-                            newAsset.picWidth = asset.picWidth;
-                            newAsset.picHeight = asset.picHeight;
+                            CustomAsset newAsset = new(asset.customAssetType, asset.customAssetFileType, asset.fileName, asset.filePath)
+                            {
+                                catalogPath = asset.catalogPath,
+                                picWidth = asset.picWidth,
+                                picHeight = asset.picHeight
+                            };
                             customAssets.Add(newAsset);
                         }
                     }
@@ -301,15 +298,15 @@ namespace CustomStreamMaker
                     missingFileMessage.Dispose();
                 }
             }
-            foreach (var path in bundlesToLoad)
+            foreach (var (bundle, isAddressable) in bundlesToLoad)
             {
-                List<string> clipNames = new();
-                var findClipNames = clipsToLoad.FindAll(c => c.bundle == path.bundle);
+                List<string> clipNames = [];
+                var findClipNames = clipsToLoad.FindAll(c => c.bundle == bundle);
                 for (int i = 0; i < findClipNames.Count; i++)
                 {
                     clipNames.Add(findClipNames[i].clipName);
                 }
-                ImportSelectedSpritesFromAssetBundle(path.bundle, clipNames, path.isAddressable);
+                ImportSelectedSpritesFromAssetBundle(bundle, clipNames, isAddressable);
             }
         }
 
@@ -367,20 +364,24 @@ namespace CustomStreamMaker
 
         internal static void SaveCustomAssets()
         {
-            CustomAssetSettings customAssetSettings = new();
-            customAssetSettings.customAssets = customAssets;
-            customAssetSettings.catalogPath = catalogPath;
+            CustomAssetSettings customAssetSettings = new()
+            {
+                customAssets = customAssets,
+                catalogPath = catalogPath
+            };
             var json = JsonConvert.SerializeObject(customAssetSettings, Formatting.Indented);
             Properties.Settings.Default.CustomAssetSettings = json;
             Properties.Settings.Default.Save();
         }
         internal static bool InitializeCatalogPath()
         {
-            OpenFileDialog openNsoStream = new OpenFileDialog();
-            openNsoStream.InitialDirectory = string.IsNullOrEmpty(Properties.Settings.Default.BundleDirectory) ? Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) : Properties.Settings.Default.BundleDirectory;
-            openNsoStream.Filter = "JSON File (*.json)|*.json";
-            openNsoStream.FilterIndex = 1;
-            openNsoStream.RestoreDirectory = true;
+            OpenFileDialog openNsoStream = new()
+            {
+                InitialDirectory = string.IsNullOrEmpty(Properties.Settings.Default.BundleDirectory) ? Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) : Properties.Settings.Default.BundleDirectory,
+                Filter = "JSON File (*.json)|*.json",
+                FilterIndex = 1,
+                RestoreDirectory = true
+            };
             if (openNsoStream.ShowDialog() == DialogResult.OK)
             {
                 Properties.Settings.Default.BundleDirectory = Path.GetDirectoryName(openNsoStream.FileName);
@@ -506,9 +507,11 @@ namespace CustomStreamMaker
                         {
                             file.Write(texDat, 0, texDat.Length);
                         }
-                        var importedAnimInfo = new CustomAsset(CustomAssetType.Sprite, isAddressable ? CustomAssetFileType.AddressableBundle : CustomAssetFileType.AssetBundle, animNames[i], path);
-                        importedAnimInfo.picWidth = pic["m_Width"].AsInt;
-                        importedAnimInfo.picHeight = pic["m_Height"].AsInt;
+                        var importedAnimInfo = new CustomAsset(CustomAssetType.Sprite, isAddressable ? CustomAssetFileType.AddressableBundle : CustomAssetFileType.AssetBundle, animNames[i], path)
+                        {
+                            picWidth = pic["m_Width"].AsInt,
+                            picHeight = pic["m_Height"].AsInt
+                        };
                         customAssets.Add(importedAnimInfo);
                         break;
 
@@ -523,11 +526,13 @@ namespace CustomStreamMaker
         internal static void ImportSpriteFromAssetBundle(bool isEncodedLz4, bool isAddressable = false)
         {
             var path = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\CustomStreamMaker\CustomAnimationClips";
-            OpenFileDialog openNsoStream = new OpenFileDialog();
-            openNsoStream.InitialDirectory = string.IsNullOrEmpty(Properties.Settings.Default.BundleDirectory) ? Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) : Properties.Settings.Default.BundleDirectory;
-            openNsoStream.Filter = "All Files (*.*)|*.*";
-            openNsoStream.FilterIndex = 1;
-            openNsoStream.RestoreDirectory = true;
+            OpenFileDialog openNsoStream = new()
+            {
+                InitialDirectory = string.IsNullOrEmpty(Properties.Settings.Default.BundleDirectory) ? Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) : Properties.Settings.Default.BundleDirectory,
+                Filter = "All Files (*.*)|*.*",
+                FilterIndex = 1,
+                RestoreDirectory = true
+            };
             if (openNsoStream.ShowDialog() == DialogResult.OK)
             {
                 Properties.Settings.Default.BundleDirectory = Path.GetDirectoryName(openNsoStream.FileName);
@@ -547,7 +552,7 @@ namespace CustomStreamMaker
                     var assInst = am.LoadAssetsFileFromBundle(bunInst, 0, true);
                     var bundleName = Path.GetFileNameWithoutExtension(openNsoStream.FileName);
                     var pathToCacheBundle = Path.Combine(path, bundleName);
-                    List<string> animNames = new();
+                    List<string> animNames = [];
                     foreach (var info in assInst.file.GetAssetsOfType(AssetClassID.AnimationClip))
                     {
                         var anim = am.GetBaseField(assInst, info);
@@ -592,9 +597,11 @@ namespace CustomStreamMaker
                             {
                                 file.Write(texDat, 0, texDat.Length);
                             }
-                            var importedAnimInfo = new CustomAsset(CustomAssetType.Sprite, isAddressable ? CustomAssetFileType.AddressableBundle : CustomAssetFileType.AssetBundle, animNames[i], openNsoStream.FileName);
-                            importedAnimInfo.picWidth = pic["m_Width"].AsInt;
-                            importedAnimInfo.picHeight = pic["m_Height"].AsInt;
+                            var importedAnimInfo = new CustomAsset(CustomAssetType.Sprite, isAddressable ? CustomAssetFileType.AddressableBundle : CustomAssetFileType.AssetBundle, animNames[i], openNsoStream.FileName)
+                            {
+                                picWidth = pic["m_Width"].AsInt,
+                                picHeight = pic["m_Height"].AsInt
+                            };
                             customAssets.Add(importedAnimInfo);
                             break;
                         }
@@ -617,7 +624,7 @@ namespace CustomStreamMaker
                 var assInst = am.LoadAssetsFileFromBundle(bunInst, 0, true);
                 var bundleName = Path.GetFileNameWithoutExtension(path);
                 var pathToCacheBundle = Path.Combine(path, bundleName);
-                List<string> animNames = new();
+                List<string> animNames = [];
                 foreach (var info in assInst.file.GetAssetsOfType(AssetClassID.AnimationClip))
                 {
                     var anim = am.GetBaseField(assInst, info);
@@ -649,7 +656,7 @@ namespace CustomStreamMaker
             {
                 var data = File.ReadAllBytes(path);
                 var format = Image.DetectFormat(data);
-                if (format == null || !(format is PngFormat || format is JpegFormat))
+                if (format is null or not (PngFormat or JpegFormat))
                 {
                     message = "Could not load image file, only PNG's and JPEG's are supported.";
                     return false;
@@ -664,12 +671,14 @@ namespace CustomStreamMaker
         {
             bool isLoadImages = false;
             bool isErrorExist = false;
-            OpenFileDialog openNsoStream = new OpenFileDialog();
-            openNsoStream.InitialDirectory = string.IsNullOrEmpty(Properties.Settings.Default.ImageDirectory) ? Environment.GetFolderPath(Environment.SpecialFolder.MyPictures) : Properties.Settings.Default.ImageDirectory;
-            openNsoStream.Filter = "png File (*.png)|*.png|jpg File (*.jpg)|*.jpg";
-            openNsoStream.FilterIndex = 1;
-            openNsoStream.RestoreDirectory = true;
-            openNsoStream.Multiselect = true;
+            OpenFileDialog openNsoStream = new()
+            {
+                InitialDirectory = string.IsNullOrEmpty(Properties.Settings.Default.ImageDirectory) ? Environment.GetFolderPath(Environment.SpecialFolder.MyPictures) : Properties.Settings.Default.ImageDirectory,
+                Filter = "png File (*.png)|*.png|jpg File (*.jpg)|*.jpg",
+                FilterIndex = 1,
+                RestoreDirectory = true,
+                Multiselect = true
+            };
             if (openNsoStream.ShowDialog() == DialogResult.OK)
             {
                 Properties.Settings.Default.ImageDirectory = Path.GetDirectoryName(openNsoStream.FileNames[0]);
@@ -679,7 +688,7 @@ namespace CustomStreamMaker
                     {
                         var data = File.ReadAllBytes(file);
                         var format = Image.DetectFormat(data);
-                        if (format == null || !(format is PngFormat || format is JpegFormat))
+                        if (format is null or not (PngFormat or JpegFormat))
                         {
                             MessageBox.Show("Could not load image file, only PNG's and JPEG's are supported.", "Unsupported file type", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return;

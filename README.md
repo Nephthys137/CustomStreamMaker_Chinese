@@ -1,21 +1,21 @@
-# Custom Stream Maker
+# 自定义直播生成器
 
-![2023-08-20 (16)](https://github.com/amazeedaizee/CustomStreamMaker/assets/131136866/76f573b3-7881-4f57-9efc-9ae4649d4277)
+![image](https://github.com/Nephthys137/CustomStreamMaker_Chinese/assets/168308430/5aba9162-663c-4279-bdd6-440850660895)
 
 
-Custom Stream Maker is a **Windows-only** program that allows you to make your own Needy Streamer Overload streams using audio, animations and more from the game!
+Custom Stream Maker是一个**仅限Windows的**程序，允许您使用游戏中的音频、动画等制作自己的Needy Streamer Overload直播!
 
-There's also a companion game mod for this program, [Custom Stream Loader](https://github.com/amazeedaizee/CustomStreamLoader), which allows you to see your custom streams in action on the game itself!
+这个程序还有一个配套的游戏模组, [Custom Stream Loader](https://github.com/amazeedaizee/CustomStreamLoader), 它允许您在游戏本身上查看您的自定义直播!
 
-#### Please note: This program does not come with the assets yourself, you need your own copy of Needy Streamer Overload to preview any assets from the game.
+#### 请注意：该程序本身不附带资产，您需要自己的Needy Streamer Overload才能预览游戏中的任何资产.
 
-This program also supports custom backgrounds and sprites as well!
+该程序还支持自定义背景和图片/动画!
 
-**Custom backgrounds** use png and jpg images.
+**自定义背景** 使用 png 和 jpg 图像.
 
-**Custom sprites/animation clips** uses Asset Bundles you make yourself and searches for any valid animation clips to use for previewing. You can also use Asset Bundles from Addressables you create, though you need a valid catalog to do so.
+**自定义图片/动画** 使用您自己制作的Asset Bundles，并搜索任何有效的动画以用于预览。您也可以从您创建的Addressables中使用资产包，尽管您需要一个有效的目录来这样做.
 
-**Note: When using the Asset Bundle option to add custom animations, the program can't tell between Asset Bundles and Addressable Bundles; while this is minor in the program, it might cause a problem when the bundle is read in the companion game mod, so make sure you choose the right option for what kind of bundle you'll use when adding custom animations.**
+**注意：当使用Asset Bundle选项添加自定义动画时，程序无法区分Asset Bundles和Addressable Bundles；虽然这在程序中是次要的，但在配套游戏模组中读取捆绑包时可能会导致问题，因此请确保在添加自定义动画时为要使用的捆绑包类型选择正确的选项。**
 
 ## Libraries
 

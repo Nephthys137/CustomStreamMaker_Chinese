@@ -177,7 +177,7 @@
             this.StartingBackground_Label.Name = "StartingBackground_Label";
             this.StartingBackground_Label.Size = new System.Drawing.Size(104, 13);
             this.StartingBackground_Label.TabIndex = 4;
-            this.StartingBackground_Label.Text = "Starting Background";
+            this.StartingBackground_Label.Text = "启动背景";
             // 
             // StartingAnimation_List
             // 
@@ -197,7 +197,7 @@
             this.StartingAnimation_Label.Name = "StartingAnimation_Label";
             this.StartingAnimation_Label.Size = new System.Drawing.Size(92, 13);
             this.StartingAnimation_Label.TabIndex = 4;
-            this.StartingAnimation_Label.Text = "Starting Animation";
+            this.StartingAnimation_Label.Text = "启动动画";
             // 
             // StartingMusic_List
             // 
@@ -218,7 +218,7 @@
             this.StartingMusic_Label.Name = "StartingMusic_Label";
             this.StartingMusic_Label.Size = new System.Drawing.Size(74, 13);
             this.StartingMusic_Label.TabIndex = 4;
-            this.StartingMusic_Label.Text = "Starting Music";
+            this.StartingMusic_Label.Text = "启动音乐";
             // 
             // StreamChatStatus_Label
             // 
@@ -227,7 +227,7 @@
             this.StreamChatStatus_Label.Name = "StreamChatStatus_Label";
             this.StreamChatStatus_Label.Size = new System.Drawing.Size(98, 13);
             this.StreamChatStatus_Label.TabIndex = 4;
-            this.StreamChatStatus_Label.Text = "Stream Chat Status";
+            this.StreamChatStatus_Label.Text = "直播聊天状态";
             // 
             // StreamTItle_Text
             // 
@@ -245,7 +245,7 @@
             this.StreamTitle_Label.Name = "StreamTitle_Label";
             this.StreamTitle_Label.Size = new System.Drawing.Size(63, 13);
             this.StreamTitle_Label.TabIndex = 4;
-            this.StreamTitle_Label.Text = "Stream Title";
+            this.StreamTitle_Label.Text = "直播标题";
             // 
             // StartingEffect_List
             // 
@@ -264,7 +264,7 @@
             this.StartingEffect_Label.Name = "StartingEffect_Label";
             this.StartingEffect_Label.Size = new System.Drawing.Size(74, 13);
             this.StartingEffect_Label.TabIndex = 4;
-            this.StartingEffect_Label.Text = "Starting Effect";
+            this.StartingEffect_Label.Text = "启动效果";
             // 
             // EffectIntensity_Trackbar
             // 
@@ -285,7 +285,7 @@
             this.EffectIntensity_Label.Name = "EffectIntensity_Label";
             this.EffectIntensity_Label.Size = new System.Drawing.Size(46, 13);
             this.EffectIntensity_Label.TabIndex = 4;
-            this.EffectIntensity_Label.Text = "Intensity";
+            this.EffectIntensity_Label.Text = "强度";
             // 
             // ChatStatusNormal_Radio
             // 
@@ -296,7 +296,7 @@
             this.ChatStatusNormal_Radio.Size = new System.Drawing.Size(58, 17);
             this.ChatStatusNormal_Radio.TabIndex = 1;
             this.ChatStatusNormal_Radio.TabStop = true;
-            this.ChatStatusNormal_Radio.Text = "Normal";
+            this.ChatStatusNormal_Radio.Text = "正常";
             this.ChatStatusNormal_Radio.UseVisualStyleBackColor = true;
             this.ChatStatusNormal_Radio.CheckedChanged += new System.EventHandler(this.ChatStatusNormal_Radio_CheckedChanged);
             // 
@@ -307,7 +307,7 @@
             this.ChatStatusParty_Radio.Name = "ChatStatusParty_Radio";
             this.ChatStatusParty_Radio.Size = new System.Drawing.Size(78, 17);
             this.ChatStatusParty_Radio.TabIndex = 2;
-            this.ChatStatusParty_Radio.Text = "Celebration";
+            this.ChatStatusParty_Radio.Text = "庆祝";
             this.ChatStatusParty_Radio.UseVisualStyleBackColor = true;
             this.ChatStatusParty_Radio.CheckedChanged += new System.EventHandler(this.ChatStatusParty_Radio_CheckedChanged);
             // 
@@ -318,7 +318,7 @@
             this.ChatStatusUncontrol_Radio.Name = "ChatStatusUncontrol_Radio";
             this.ChatStatusUncontrol_Radio.Size = new System.Drawing.Size(93, 17);
             this.ChatStatusUncontrol_Radio.TabIndex = 3;
-            this.ChatStatusUncontrol_Radio.Text = "Uncontrollable";
+            this.ChatStatusUncontrol_Radio.Text = "失控";
             this.ChatStatusUncontrol_Radio.UseVisualStyleBackColor = true;
             this.ChatStatusUncontrol_Radio.CheckedChanged += new System.EventHandler(this.ChatStatusUncontrol_Radio_CheckedChanged);
             // 
@@ -327,23 +327,24 @@
             this.PlayingType_List.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.PlayingType_List.FormattingEnabled = true;
             this.PlayingType_List.Items.AddRange(new object[] {
-            "KAngel Dialogue",
-            "Chat Comment",
-            "Play Sound Effect",
-            "Play Music",
-            "Play Border Effect",
-            "Random First Comments",
-            "Random Middle Comments",
-            "Random Last Comments",
-            "Rainbow Super Chats",
-            "Delete Last Comment",
-            "Delete All Comments",
-            "Start Reading Super Chats"});
+            "互动",
+            "聊天评论",
+            "播放音效",
+            "播放音乐",
+            "播放边框效果",
+            "随机开播评论",
+            "随机评论",
+            "随机结束评论",
+            "彩虹Super Chats",
+            "删除最后一条评论",
+            "删除所有评论",
+            "开始阅读Super Chats"});
             this.PlayingType_List.Location = new System.Drawing.Point(799, 51);
             this.PlayingType_List.Name = "PlayingType_List";
             this.PlayingType_List.Size = new System.Drawing.Size(263, 21);
             this.PlayingType_List.TabIndex = 11;
             this.PlayingType_List.SelectedIndexChanged += new System.EventHandler(this.PlayingType_List_SelectedIndexChanged);
+            this.PlayingType_List.SelectedIndex = 0;
             // 
             // PlayingType_Label
             // 
@@ -352,7 +353,7 @@
             this.PlayingType_Label.Name = "PlayingType_Label";
             this.PlayingType_Label.Size = new System.Drawing.Size(68, 13);
             this.PlayingType_Label.TabIndex = 4;
-            this.PlayingType_Label.Text = "Playing Type";
+            this.PlayingType_Label.Text = "播放类型";
             // 
             // ChatComment_Group
             // 
@@ -364,7 +365,7 @@
             this.ChatComment_Group.Size = new System.Drawing.Size(263, 115);
             this.ChatComment_Group.TabIndex = 8;
             this.ChatComment_Group.TabStop = false;
-            this.ChatComment_Group.Text = "Chat Comment";
+            this.ChatComment_Group.Text = "聊天评论";
             // 
             // IsSuperChat_Check
             // 
@@ -373,7 +374,7 @@
             this.IsSuperChat_Check.Name = "IsSuperChat_Check";
             this.IsSuperChat_Check.Size = new System.Drawing.Size(90, 17);
             this.IsSuperChat_Check.TabIndex = 14;
-            this.IsSuperChat_Check.Text = "Is Super Chat";
+            this.IsSuperChat_Check.Text = "Super Chat";
             this.IsSuperChat_Check.UseVisualStyleBackColor = true;
             this.IsSuperChat_Check.CheckedChanged += new System.EventHandler(this.IsSuperChat_Check_CheckedChanged);
             // 
@@ -384,7 +385,7 @@
             this.IsStressComment_Check.Name = "IsStressComment_Check";
             this.IsStressComment_Check.Size = new System.Drawing.Size(124, 17);
             this.IsStressComment_Check.TabIndex = 13;
-            this.IsStressComment_Check.Text = "Is Stressful Comment";
+            this.IsStressComment_Check.Text = "负面评论";
             this.IsStressComment_Check.UseVisualStyleBackColor = true;
             this.IsStressComment_Check.CheckedChanged += new System.EventHandler(this.IsStressComment_Check_CheckedChanged);
             // 
@@ -403,7 +404,7 @@
             this.AddSaveToPlayingList_Button.Name = "AddSaveToPlayingList_Button";
             this.AddSaveToPlayingList_Button.Size = new System.Drawing.Size(263, 41);
             this.AddSaveToPlayingList_Button.TabIndex = 9;
-            this.AddSaveToPlayingList_Button.Text = "Add To Playing List";
+            this.AddSaveToPlayingList_Button.Text = "添加到播放列表";
             this.AddSaveToPlayingList_Button.UseVisualStyleBackColor = true;
             this.AddSaveToPlayingList_Button.Click += new System.EventHandler(this.AddSaveToPlayingList_Button_Click);
             // 
@@ -418,7 +419,7 @@
             this.StreamMenuStrip.Name = "StreamMenuStrip";
             this.StreamMenuStrip.Size = new System.Drawing.Size(1074, 24);
             this.StreamMenuStrip.TabIndex = 10;
-            this.StreamMenuStrip.Text = "menuStrip1";
+            this.StreamMenuStrip.Text = "菜单条1";
             this.StreamMenuStrip.Click += new System.EventHandler(this.StreamMenuStrip_Click);
             // 
             // fileToolStripMenuItem
@@ -433,14 +434,14 @@
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.J)));
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-            this.fileToolStripMenuItem.Text = "File";
+            this.fileToolStripMenuItem.Text = "文件";
             // 
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
             this.newToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
             this.newToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
-            this.newToolStripMenuItem.Text = "New";
+            this.newToolStripMenuItem.Text = "新建";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
@@ -453,7 +454,7 @@
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
             this.loadToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
             this.loadToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
-            this.loadToolStripMenuItem.Text = "Load";
+            this.loadToolStripMenuItem.Text = "加载";
             this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
@@ -466,7 +467,7 @@
             this.saveToolStripMenuItem1.Name = "saveToolStripMenuItem1";
             this.saveToolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
             this.saveToolStripMenuItem1.Size = new System.Drawing.Size(186, 22);
-            this.saveToolStripMenuItem1.Text = "Save";
+            this.saveToolStripMenuItem1.Text = "保存";
             this.saveToolStripMenuItem1.Click += new System.EventHandler(this.saveToolStripMenuItem1_Click);
             // 
             // saveToolStripMenuItem
@@ -475,7 +476,7 @@
             this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.S)));
             this.saveToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
-            this.saveToolStripMenuItem.Text = "Save As";
+            this.saveToolStripMenuItem.Text = "保存为";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // editToolStripMenuItem
@@ -483,7 +484,7 @@
             this.editToolStripMenuItem.DropDown = this.EditMenuStrip;
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
-            this.editToolStripMenuItem.Text = "Edit";
+            this.editToolStripMenuItem.Text = "编辑";
             // 
             // EditMenuStrip
             // 
@@ -511,7 +512,7 @@
             this.undoToolStripMenuItem1.Name = "undoToolStripMenuItem1";
             this.undoToolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
             this.undoToolStripMenuItem1.Size = new System.Drawing.Size(290, 22);
-            this.undoToolStripMenuItem1.Text = "Undo";
+            this.undoToolStripMenuItem1.Text = "撤销";
             this.undoToolStripMenuItem1.Click += new System.EventHandler(this.undoToolStripMenuItem_Click);
             // 
             // redoToolStripMenuItem1
@@ -519,7 +520,7 @@
             this.redoToolStripMenuItem1.Name = "redoToolStripMenuItem1";
             this.redoToolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
             this.redoToolStripMenuItem1.Size = new System.Drawing.Size(290, 22);
-            this.redoToolStripMenuItem1.Text = "Redo";
+            this.redoToolStripMenuItem1.Text = "重做";
             this.redoToolStripMenuItem1.Click += new System.EventHandler(this.redoToolStripMenuItem_Click);
             // 
             // toolStripSeparator5
@@ -532,7 +533,7 @@
             this.cutToolStripMenuItem1.Name = "cutToolStripMenuItem1";
             this.cutToolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
             this.cutToolStripMenuItem1.Size = new System.Drawing.Size(290, 22);
-            this.cutToolStripMenuItem1.Text = "Cut";
+            this.cutToolStripMenuItem1.Text = "剪切";
             this.cutToolStripMenuItem1.Click += new System.EventHandler(this.cutToolStripMenuItem_Click);
             // 
             // copyToolStripMenuItem
@@ -540,7 +541,7 @@
             this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
             this.copyToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
             this.copyToolStripMenuItem.Size = new System.Drawing.Size(290, 22);
-            this.copyToolStripMenuItem.Text = "Copy";
+            this.copyToolStripMenuItem.Text = "复制";
             this.copyToolStripMenuItem.Click += new System.EventHandler(this.copyTextToolStripMenuItem_Click);
             // 
             // pasteToolStripMenuItem
@@ -548,7 +549,7 @@
             this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
             this.pasteToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
             this.pasteToolStripMenuItem.Size = new System.Drawing.Size(290, 22);
-            this.pasteToolStripMenuItem.Text = "Paste";
+            this.pasteToolStripMenuItem.Text = "粘贴";
             this.pasteToolStripMenuItem.Click += new System.EventHandler(this.pasteTextToolStripMenuItem_Click);
             // 
             // toolStripSeparator6
@@ -562,7 +563,7 @@
             this.pasteNewAboveSelectionToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.V)));
             this.pasteNewAboveSelectionToolStripMenuItem.Size = new System.Drawing.Size(290, 22);
-            this.pasteNewAboveSelectionToolStripMenuItem.Text = "Paste New Above Selection";
+            this.pasteNewAboveSelectionToolStripMenuItem.Text = "粘贴到所选内容上方";
             this.pasteNewAboveSelectionToolStripMenuItem.Click += new System.EventHandler(this.addCopiedAboveSelectionToolStripMenuItem_Click);
             // 
             // pasteNewBelowSelectionToolStripMenuItem
@@ -571,7 +572,7 @@
             this.pasteNewBelowSelectionToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
             | System.Windows.Forms.Keys.V)));
             this.pasteNewBelowSelectionToolStripMenuItem.Size = new System.Drawing.Size(290, 22);
-            this.pasteNewBelowSelectionToolStripMenuItem.Text = "Paste New Below Selection";
+            this.pasteNewBelowSelectionToolStripMenuItem.Text = "粘贴到所选内容下方";
             this.pasteNewBelowSelectionToolStripMenuItem.Click += new System.EventHandler(this.addCopiedBelowSelectionToolStripMenuItem_Click);
             // 
             // toolStripSeparator7
@@ -585,7 +586,7 @@
             this.moveSelectionUpToolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.Up)));
             this.moveSelectionUpToolStripMenuItem1.Size = new System.Drawing.Size(290, 22);
-            this.moveSelectionUpToolStripMenuItem1.Text = "Move Selection Up";
+            this.moveSelectionUpToolStripMenuItem1.Text = "上移所选内容";
             this.moveSelectionUpToolStripMenuItem1.Click += new System.EventHandler(this.moveSelectionUpToolStripMenuItem_Click);
             // 
             // moveSelectionDownToolStripMenuItem1
@@ -594,7 +595,7 @@
             this.moveSelectionDownToolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.Down)));
             this.moveSelectionDownToolStripMenuItem1.Size = new System.Drawing.Size(290, 22);
-            this.moveSelectionDownToolStripMenuItem1.Text = "Move Selection Down";
+            this.moveSelectionDownToolStripMenuItem1.Text = "下移所选内容";
             this.moveSelectionDownToolStripMenuItem1.Click += new System.EventHandler(this.moveSelectionDownToolStripMenuItem_Click);
             // 
             // assetsToolStripMenuItem
@@ -616,14 +617,14 @@
             this.initializeAddressableCatalogToolStripMenuItem});
             this.assetsToolStripMenuItem.Name = "assetsToolStripMenuItem";
             this.assetsToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
-            this.assetsToolStripMenuItem.Text = "Assets";
+            this.assetsToolStripMenuItem.Text = "资产";
             this.assetsToolStripMenuItem.DropDownOpening += new System.EventHandler(this.assetsToolStripMenuItem_DropDownOpening);
             // 
             // viewCustomAssetsToolStripMenuItem
             // 
             this.viewCustomAssetsToolStripMenuItem.Name = "viewCustomAssetsToolStripMenuItem";
             this.viewCustomAssetsToolStripMenuItem.Size = new System.Drawing.Size(367, 22);
-            this.viewCustomAssetsToolStripMenuItem.Text = "View Custom Assets";
+            this.viewCustomAssetsToolStripMenuItem.Text = "查看自定义资产";
             this.viewCustomAssetsToolStripMenuItem.Click += new System.EventHandler(this.viewCustomAssetsToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
@@ -635,7 +636,7 @@
             // 
             this.createBackgroundFromImageToolStripMenuItem.Name = "createBackgroundFromImageToolStripMenuItem";
             this.createBackgroundFromImageToolStripMenuItem.Size = new System.Drawing.Size(367, 22);
-            this.createBackgroundFromImageToolStripMenuItem.Text = "Import Image For Background (jpg, png)";
+            this.createBackgroundFromImageToolStripMenuItem.Text = "导入背景图像（jpg，png）";
             this.createBackgroundFromImageToolStripMenuItem.Click += new System.EventHandler(this.createBackgroundFromImageToolStripMenuItem_Click);
             // 
             // toolStripSeparator10
@@ -648,7 +649,7 @@
             // 
             this.importCachedAnimationClipsToolStripMenuItem.Name = "importCachedAnimationClipsToolStripMenuItem";
             this.importCachedAnimationClipsToolStripMenuItem.Size = new System.Drawing.Size(367, 22);
-            this.importCachedAnimationClipsToolStripMenuItem.Text = "Import Cached Animation Clips";
+            this.importCachedAnimationClipsToolStripMenuItem.Text = "导入缓存的动画";
             this.importCachedAnimationClipsToolStripMenuItem.Visible = false;
             this.importCachedAnimationClipsToolStripMenuItem.Click += new System.EventHandler(this.importCachedAnimationClipsToolStripMenuItem_Click_1);
             // 
@@ -661,14 +662,14 @@
             // 
             this.createAnimationFromAssetBundlelz4ToolStripMenuItem.Name = "createAnimationFromAssetBundlelz4ToolStripMenuItem";
             this.createAnimationFromAssetBundlelz4ToolStripMenuItem.Size = new System.Drawing.Size(367, 22);
-            this.createAnimationFromAssetBundlelz4ToolStripMenuItem.Text = "Import Animation Clip From Asset Bundle";
+            this.createAnimationFromAssetBundlelz4ToolStripMenuItem.Text = "从Asset Bundle导入动画";
             this.createAnimationFromAssetBundlelz4ToolStripMenuItem.Click += new System.EventHandler(this.createAnimationFromAssetBundlelz4ToolStripMenuItem_Click);
             // 
             // createAnimationFromAssetBundlelToolStripMenuItem
             // 
             this.createAnimationFromAssetBundlelToolStripMenuItem.Name = "createAnimationFromAssetBundlelToolStripMenuItem";
             this.createAnimationFromAssetBundlelToolStripMenuItem.Size = new System.Drawing.Size(367, 22);
-            this.createAnimationFromAssetBundlelToolStripMenuItem.Text = "Import Animation Clip From Asset Bundle (lzma)";
+            this.createAnimationFromAssetBundlelToolStripMenuItem.Text = "从Asset Bundle (lzma)导入动画";
             this.createAnimationFromAssetBundlelToolStripMenuItem.Visible = false;
             this.createAnimationFromAssetBundlelToolStripMenuItem.Click += new System.EventHandler(this.createAnimationFromAssetBundlelToolStripMenuItem_Click);
             // 
@@ -681,14 +682,14 @@
             // 
             this.createAnimationFromAddressableBundlelz4ToolStripMenuItem.Name = "createAnimationFromAddressableBundlelz4ToolStripMenuItem";
             this.createAnimationFromAddressableBundlelz4ToolStripMenuItem.Size = new System.Drawing.Size(367, 22);
-            this.createAnimationFromAddressableBundlelz4ToolStripMenuItem.Text = "Import Animation Clip From Addressable Bundle";
+            this.createAnimationFromAddressableBundlelz4ToolStripMenuItem.Text = "从Addressable Bundle导入动画";
             this.createAnimationFromAddressableBundlelz4ToolStripMenuItem.Click += new System.EventHandler(this.createAnimationFromAddressableBundlelz4ToolStripMenuItem_Click);
             // 
             // createAnimationFromAddressableBundlelzmaToolStripMenuItem
             // 
             this.createAnimationFromAddressableBundlelzmaToolStripMenuItem.Name = "createAnimationFromAddressableBundlelzmaToolStripMenuItem";
             this.createAnimationFromAddressableBundlelzmaToolStripMenuItem.Size = new System.Drawing.Size(367, 22);
-            this.createAnimationFromAddressableBundlelzmaToolStripMenuItem.Text = "Import Animation Clip From Addressable Bundle (lzma)";
+            this.createAnimationFromAddressableBundlelzmaToolStripMenuItem.Text = "从Addressable Bundle (lzma)导入动画";
             this.createAnimationFromAddressableBundlelzmaToolStripMenuItem.Visible = false;
             this.createAnimationFromAddressableBundlelzmaToolStripMenuItem.Click += new System.EventHandler(this.createAnimationFromAddressableBundlelzmaToolStripMenuItem_Click);
             // 
@@ -701,7 +702,7 @@
             // 
             this.initializeAddressableCatalogToolStripMenuItem.Name = "initializeAddressableCatalogToolStripMenuItem";
             this.initializeAddressableCatalogToolStripMenuItem.Size = new System.Drawing.Size(367, 22);
-            this.initializeAddressableCatalogToolStripMenuItem.Text = "Initialize Addressable Catalog";
+            this.initializeAddressableCatalogToolStripMenuItem.Text = "初始化Addressable Catalog";
             this.initializeAddressableCatalogToolStripMenuItem.Click += new System.EventHandler(this.initializeAddressableCatalogToolStripMenuItem_Click);
             // 
             // streamLoaderToolStripMenuItem
@@ -711,20 +712,20 @@
             this.loadSavedStreamToolStripMenuItem});
             this.streamLoaderToolStripMenuItem.Name = "streamLoaderToolStripMenuItem";
             this.streamLoaderToolStripMenuItem.Size = new System.Drawing.Size(95, 20);
-            this.streamLoaderToolStripMenuItem.Text = "Stream Loader";
+            this.streamLoaderToolStripMenuItem.Text = "直播加载器";
             // 
             // loadCurrentStreamToolStripMenuItem
             // 
             this.loadCurrentStreamToolStripMenuItem.Name = "loadCurrentStreamToolStripMenuItem";
             this.loadCurrentStreamToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
-            this.loadCurrentStreamToolStripMenuItem.Text = "Set Current Stream To Loader";
+            this.loadCurrentStreamToolStripMenuItem.Text = "将当前直播设置为加载";
             this.loadCurrentStreamToolStripMenuItem.Click += new System.EventHandler(this.loadCurrentStreamToolStripMenuItem_Click);
             // 
             // loadSavedStreamToolStripMenuItem
             // 
             this.loadSavedStreamToolStripMenuItem.Name = "loadSavedStreamToolStripMenuItem";
             this.loadSavedStreamToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
-            this.loadSavedStreamToolStripMenuItem.Text = "Set Saved Stream To Loader...";
+            this.loadSavedStreamToolStripMenuItem.Text = "将保存的直播设置为加载...";
             this.loadSavedStreamToolStripMenuItem.Click += new System.EventHandler(this.loadSavedStreamToolStripMenuItem_Click);
             // 
             // KAngelReply_TextBox
@@ -745,7 +746,7 @@
             this.KAngelReply_Label.Name = "KAngelReply_Label";
             this.KAngelReply_Label.Size = new System.Drawing.Size(86, 13);
             this.KAngelReply_Label.TabIndex = 4;
-            this.KAngelReply_Label.Text = "KAngel Dialogue";
+            this.KAngelReply_Label.Text = "回复";
             // 
             // KAnim_SuperReply_List
             // 
@@ -765,7 +766,7 @@
             this.KAnimReply_Label.Name = "KAnimReply_Label";
             this.KAnimReply_Label.Size = new System.Drawing.Size(90, 13);
             this.KAnimReply_Label.TabIndex = 4;
-            this.KAnimReply_Label.Text = "KAngel Animation";
+            this.KAnimReply_Label.Text = "动画";
             // 
             // SuperChatReply_Group
             // 
@@ -779,7 +780,7 @@
             this.SuperChatReply_Group.Size = new System.Drawing.Size(263, 189);
             this.SuperChatReply_Group.TabIndex = 11;
             this.SuperChatReply_Group.TabStop = false;
-            this.SuperChatReply_Group.Text = "Super Chat Reply";
+            this.SuperChatReply_Group.Text = "读Super Chat";
             // 
             // AddEditReplies_TextBox
             // 
@@ -787,7 +788,7 @@
             this.AddEditReplies_TextBox.Name = "AddEditReplies_TextBox";
             this.AddEditReplies_TextBox.Size = new System.Drawing.Size(132, 33);
             this.AddEditReplies_TextBox.TabIndex = 17;
-            this.AddEditReplies_TextBox.Text = "Add/Edit Extra Replies";
+            this.AddEditReplies_TextBox.Text = "添加/编辑额外回复";
             this.AddEditReplies_TextBox.UseVisualStyleBackColor = true;
             this.AddEditReplies_TextBox.Click += new System.EventHandler(this.AddEditReplies_TextBox_Click);
             // 
@@ -803,7 +804,7 @@
             this.KAngelDialogue_Group.Size = new System.Drawing.Size(263, 160);
             this.KAngelDialogue_Group.TabIndex = 11;
             this.KAngelDialogue_Group.TabStop = false;
-            this.KAngelDialogue_Group.Text = "KAngel Dialogue";
+            this.KAngelDialogue_Group.Text = "互动";
             // 
             // IsHateCallout_Check
             // 
@@ -812,7 +813,7 @@
             this.IsHateCallout_Check.Name = "IsHateCallout_Check";
             this.IsHateCallout_Check.Size = new System.Drawing.Size(167, 17);
             this.IsHateCallout_Check.TabIndex = 14;
-            this.IsHateCallout_Check.Text = "Is Replying To Hate Comment";
+            this.IsHateCallout_Check.Text = "正在回复负面评论";
             this.IsHateCallout_Check.UseVisualStyleBackColor = true;
             this.IsHateCallout_Check.CheckedChanged += new System.EventHandler(this.IsHateCallout_Check_CheckedChanged);
             // 
@@ -844,7 +845,7 @@
             this.KAnim_Label.Name = "KAnim_Label";
             this.KAnim_Label.Size = new System.Drawing.Size(90, 13);
             this.KAnim_Label.TabIndex = 4;
-            this.KAnim_Label.Text = "KAngel Animation";
+            this.KAnim_Label.Text = "动画";
             // 
             // KAngelDialogue_Label
             // 
@@ -853,7 +854,7 @@
             this.KAngelDialogue_Label.Name = "KAngelDialogue_Label";
             this.KAngelDialogue_Label.Size = new System.Drawing.Size(86, 13);
             this.KAngelDialogue_Label.TabIndex = 4;
-            this.KAngelDialogue_Label.Text = "KAngel Dialogue";
+            this.KAngelDialogue_Label.Text = "回复";
             // 
             // StreamPlayingList
             // 
@@ -893,7 +894,7 @@
             // 
             // Type
             // 
-            this.Type.HeaderText = "Type";
+            this.Type.HeaderText = "类型";
             this.Type.Name = "Type";
             this.Type.ReadOnly = true;
             this.Type.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -901,7 +902,7 @@
             // Description
             // 
             this.Description.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Description.HeaderText = "";
+            this.Description.HeaderText = "内容";
             this.Description.Name = "Description";
             this.Description.ReadOnly = true;
             this.Description.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -927,7 +928,7 @@
             this.BorderEffect_Group.Size = new System.Drawing.Size(263, 110);
             this.BorderEffect_Group.TabIndex = 11;
             this.BorderEffect_Group.TabStop = false;
-            this.BorderEffect_Group.Text = "Border Effect";
+            this.BorderEffect_Group.Text = "边框效果";
             // 
             // BorderEffectWin_Radio
             // 
@@ -936,7 +937,7 @@
             this.BorderEffectWin_Radio.Name = "BorderEffectWin_Radio";
             this.BorderEffectWin_Radio.Size = new System.Drawing.Size(45, 17);
             this.BorderEffectWin_Radio.TabIndex = 16;
-            this.BorderEffectWin_Radio.Text = "Play";
+            this.BorderEffectWin_Radio.Text = "播放";
             this.BorderEffectWin_Radio.UseVisualStyleBackColor = true;
             // 
             // BorderEffectWinStop_Radio
@@ -946,7 +947,7 @@
             this.BorderEffectWinStop_Radio.Name = "BorderEffectWinStop_Radio";
             this.BorderEffectWinStop_Radio.Size = new System.Drawing.Size(132, 17);
             this.BorderEffectWinStop_Radio.TabIndex = 15;
-            this.BorderEffectWinStop_Radio.Text = "Pause / Ease To Play ";
+            this.BorderEffectWinStop_Radio.Text = "暂停/播放";
             this.BorderEffectWinStop_Radio.UseVisualStyleBackColor = true;
             // 
             // BorderEffectOut_Radio
@@ -956,7 +957,7 @@
             this.BorderEffectOut_Radio.Name = "BorderEffectOut_Radio";
             this.BorderEffectOut_Radio.Size = new System.Drawing.Size(69, 17);
             this.BorderEffectOut_Radio.TabIndex = 17;
-            this.BorderEffectOut_Radio.Text = "Ease Out";
+            this.BorderEffectOut_Radio.Text = "淡出";
             this.BorderEffectOut_Radio.UseVisualStyleBackColor = true;
             // 
             // BorderEffect_In_Radio
@@ -968,7 +969,7 @@
             this.BorderEffect_In_Radio.Size = new System.Drawing.Size(61, 17);
             this.BorderEffect_In_Radio.TabIndex = 13;
             this.BorderEffect_In_Radio.TabStop = true;
-            this.BorderEffect_In_Radio.Text = "Ease In";
+            this.BorderEffect_In_Radio.Text = "淡入";
             this.BorderEffect_In_Radio.UseVisualStyleBackColor = true;
             // 
             // PlaySE_Group
@@ -980,7 +981,7 @@
             this.PlaySE_Group.Size = new System.Drawing.Size(263, 68);
             this.PlaySE_Group.TabIndex = 11;
             this.PlaySE_Group.TabStop = false;
-            this.PlaySE_Group.Text = "Play Sound Effect";
+            this.PlaySE_Group.Text = "播放音效";
             // 
             // PlayCurrentSE_Button
             // 
@@ -1013,7 +1014,7 @@
             this.PlayMusic_Group.Size = new System.Drawing.Size(263, 68);
             this.PlayMusic_Group.TabIndex = 11;
             this.PlayMusic_Group.TabStop = false;
-            this.PlayMusic_Group.Text = "Play Music";
+            this.PlayMusic_Group.Text = "播放音乐";
             // 
             // PlayCurrentMusic_Button
             // 
@@ -1045,7 +1046,7 @@
             this.HateComment_Group.Size = new System.Drawing.Size(263, 66);
             this.HateComment_Group.TabIndex = 8;
             this.HateComment_Group.TabStop = false;
-            this.HateComment_Group.Text = "Hate Comment";
+            this.HateComment_Group.Text = "负面评论";
             // 
             // HateComment_Text
             // 
@@ -1083,7 +1084,7 @@
             this.KAnim_React_Group.Size = new System.Drawing.Size(263, 72);
             this.KAnim_React_Group.TabIndex = 11;
             this.KAnim_React_Group.TabStop = false;
-            this.KAnim_React_Group.Text = "Read Super Chat Animation";
+            this.KAnim_React_Group.Text = "阅读Super Chat动画";
             // 
             // KAnim_React_List
             // 
@@ -1104,7 +1105,7 @@
             this.MoreOptions_LInkLabel.Size = new System.Drawing.Size(79, 13);
             this.MoreOptions_LInkLabel.TabIndex = 10;
             this.MoreOptions_LInkLabel.TabStop = true;
-            this.MoreOptions_LInkLabel.Text = "More Options...";
+            this.MoreOptions_LInkLabel.Text = "更多选项...";
             this.MoreOptions_LInkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.MoreOptions_LInkLabel_LinkClicked);
             // 
             // InsertBelow_Button
@@ -1113,7 +1114,7 @@
             this.InsertBelow_Button.Name = "InsertBelow_Button";
             this.InsertBelow_Button.Size = new System.Drawing.Size(126, 33);
             this.InsertBelow_Button.TabIndex = 19;
-            this.InsertBelow_Button.Text = "Add Below Selection";
+            this.InsertBelow_Button.Text = "添加到选择项下方";
             this.InsertBelow_Button.UseVisualStyleBackColor = true;
             this.InsertBelow_Button.Visible = false;
             this.InsertBelow_Button.Click += new System.EventHandler(this.InsertBelow_Button_Click);
@@ -1124,7 +1125,7 @@
             this.InsertAbove_Button.Name = "InsertAbove_Button";
             this.InsertAbove_Button.Size = new System.Drawing.Size(129, 33);
             this.InsertAbove_Button.TabIndex = 18;
-            this.InsertAbove_Button.Text = "Add Above Selection";
+            this.InsertAbove_Button.Text = "添加到选择项上方";
             this.InsertAbove_Button.UseVisualStyleBackColor = true;
             this.InsertAbove_Button.Visible = false;
             this.InsertAbove_Button.Click += new System.EventHandler(this.InsertAbove_Button_Click);
@@ -1133,7 +1134,7 @@
             // 
             this.fixAnyMissingToolStripMenuItem.Name = "fixAnyMissingToolStripMenuItem";
             this.fixAnyMissingToolStripMenuItem.Size = new System.Drawing.Size(367, 22);
-            this.fixAnyMissingToolStripMenuItem.Text = "Fix Any Missing Custom Assets";
+            this.fixAnyMissingToolStripMenuItem.Text = "修复任何缺失的自定义资产";
             this.fixAnyMissingToolStripMenuItem.Click += new System.EventHandler(this.fixAnyMissingToolStripMenuItem_Click);
             // 
             // StreamEditor
@@ -1182,7 +1183,7 @@
             this.MaximizeBox = false;
             this.Name = "StreamEditor";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
-            this.Text = "Custom Stream Editor";
+            this.Text = "自定义直播编辑器";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.StreamEditor_FormClosing);
             this.Load += new System.EventHandler(this.StreamEditor_Load);
             this.Click += new System.EventHandler(this.StreamEditor_Click);

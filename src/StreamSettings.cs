@@ -50,7 +50,7 @@ namespace CustomStreamMaker
 
         public bool hasEndScreen = true;
 
-        public List<PlayingObject> PlayingList = new();
+        public List<PlayingObject> PlayingList = [];
 
         public StreamSettings() { }
     }

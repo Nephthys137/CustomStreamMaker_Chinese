@@ -66,7 +66,7 @@
             this.StreamIntro_Group.Size = new System.Drawing.Size(305, 83);
             this.StreamIntro_Group.TabIndex = 0;
             this.StreamIntro_Group.TabStop = false;
-            this.StreamIntro_Group.Text = "Stream Intro";
+            this.StreamIntro_Group.Text = "直播介绍";
             // 
             // IsDarkAngelIntro_Check
             // 
@@ -75,7 +75,7 @@
             this.IsDarkAngelIntro_Check.Name = "IsDarkAngelIntro_Check";
             this.IsDarkAngelIntro_Check.Size = new System.Drawing.Size(174, 17);
             this.IsDarkAngelIntro_Check.TabIndex = 1;
-            this.IsDarkAngelIntro_Check.Text = "Use Dark Angel Transformation";
+            this.IsDarkAngelIntro_Check.Text = "使用黑暗天使变身";
             this.IsDarkAngelIntro_Check.UseVisualStyleBackColor = true;
             this.IsDarkAngelIntro_Check.CheckedChanged += new System.EventHandler(this.IsDarkAngelIntro_Check_CheckedChanged);
             // 
@@ -86,7 +86,7 @@
             this.HasIntro_Check.Name = "HasIntro_Check";
             this.HasIntro_Check.Size = new System.Drawing.Size(186, 17);
             this.HasIntro_Check.TabIndex = 0;
-            this.HasIntro_Check.Text = "Open With Stream Transformation";
+            this.HasIntro_Check.Text = "使用天使变身";
             this.HasIntro_Check.UseVisualStyleBackColor = true;
             this.HasIntro_Check.CheckedChanged += new System.EventHandler(this.HasIntro_Check_CheckedChanged);
             // 
@@ -101,7 +101,7 @@
             this.StreamInterface_Group.Size = new System.Drawing.Size(305, 89);
             this.StreamInterface_Group.TabIndex = 0;
             this.StreamInterface_Group.TabStop = false;
-            this.StreamInterface_Group.Text = "Stream Interface";
+            this.StreamInterface_Group.Text = "直播信息";
             // 
             // CustomDay_Numeric
             // 
@@ -146,7 +146,7 @@
             this.CustomDay_Check.Name = "CustomDay_Check";
             this.CustomDay_Check.Size = new System.Drawing.Size(108, 17);
             this.CustomDay_Check.TabIndex = 2;
-            this.CustomDay_Check.Text = "Use Custom Day ";
+            this.CustomDay_Check.Text = "使用自定义日期";
             this.CustomDay_Check.UseVisualStyleBackColor = true;
             this.CustomDay_Check.CheckedChanged += new System.EventHandler(this.CustomDay_Check_CheckedChanged);
             // 
@@ -157,7 +157,7 @@
             this.HasCustomFollowers_Check.Name = "HasCustomFollowers_Check";
             this.HasCustomFollowers_Check.Size = new System.Drawing.Size(156, 17);
             this.HasCustomFollowers_Check.TabIndex = 4;
-            this.HasCustomFollowers_Check.Text = "Use Custom Follower Count";
+            this.HasCustomFollowers_Check.Text = "使用自定义粉丝数量";
             this.HasCustomFollowers_Check.UseVisualStyleBackColor = true;
             this.HasCustomFollowers_Check.CheckedChanged += new System.EventHandler(this.HasCustomFollowers_Check_CheckedChanged);
             // 
@@ -170,7 +170,7 @@
             this.GameBorders_Group.Size = new System.Drawing.Size(305, 86);
             this.GameBorders_Group.TabIndex = 0;
             this.GameBorders_Group.TabStop = false;
-            this.GameBorders_Group.Text = "Game Borders";
+            this.GameBorders_Group.Text = "游戏边框";
             // 
             // RemoveBorders_Check
             // 
@@ -179,7 +179,7 @@
             this.RemoveBorders_Check.Name = "RemoveBorders_Check";
             this.RemoveBorders_Check.Size = new System.Drawing.Size(105, 17);
             this.RemoveBorders_Check.TabIndex = 7;
-            this.RemoveBorders_Check.Text = "Remove Borders";
+            this.RemoveBorders_Check.Text = "移除边框";
             this.RemoveBorders_Check.UseVisualStyleBackColor = true;
             this.RemoveBorders_Check.CheckedChanged += new System.EventHandler(this.RemoveBorders_Check_CheckedChanged);
             // 
@@ -190,7 +190,7 @@
             this.InvertColors_Check.Name = "InvertColors_Check";
             this.InvertColors_Check.Size = new System.Drawing.Size(119, 17);
             this.InvertColors_Check.TabIndex = 6;
-            this.InvertColors_Check.Text = "Invert Border Colors";
+            this.InvertColors_Check.Text = "反转边框颜色";
             this.InvertColors_Check.UseVisualStyleBackColor = true;
             this.InvertColors_Check.CheckedChanged += new System.EventHandler(this.InvertColors_Check_CheckedChanged);
             // 
@@ -205,7 +205,7 @@
             this.StreamEnd_Group.Size = new System.Drawing.Size(305, 106);
             this.StreamEnd_Group.TabIndex = 0;
             this.StreamEnd_Group.TabStop = false;
-            this.StreamEnd_Group.Text = "Stream End";
+            this.StreamEnd_Group.Text = "直播结束";
             // 
             // OpenEndScreenImg_Button
             // 
@@ -213,7 +213,7 @@
             this.OpenEndScreenImg_Button.Name = "OpenEndScreenImg_Button";
             this.OpenEndScreenImg_Button.Size = new System.Drawing.Size(56, 23);
             this.OpenEndScreenImg_Button.TabIndex = 10;
-            this.OpenEndScreenImg_Button.Text = "Browse";
+            this.OpenEndScreenImg_Button.Text = "浏览";
             this.OpenEndScreenImg_Button.UseVisualStyleBackColor = true;
             this.OpenEndScreenImg_Button.Click += new System.EventHandler(this.OpenEndScreenImg_Button_Click);
             // 
@@ -234,7 +234,7 @@
             this.HasCustomEndScreen_Check.Name = "HasCustomEndScreen_Check";
             this.HasCustomEndScreen_Check.Size = new System.Drawing.Size(142, 17);
             this.HasCustomEndScreen_Check.TabIndex = 9;
-            this.HasCustomEndScreen_Check.Text = "Has Custom End Screen";
+            this.HasCustomEndScreen_Check.Text = "有自定义结束屏幕";
             this.HasCustomEndScreen_Check.UseVisualStyleBackColor = true;
             this.HasCustomEndScreen_Check.CheckedChanged += new System.EventHandler(this.HasCustomEndScreen_Check_CheckedChanged);
             // 
@@ -245,7 +245,7 @@
             this.HasEndScreen_Check.Name = "HasEndScreen_Check";
             this.HasEndScreen_Check.Size = new System.Drawing.Size(104, 17);
             this.HasEndScreen_Check.TabIndex = 8;
-            this.HasEndScreen_Check.Text = "Has End Screen";
+            this.HasEndScreen_Check.Text = "有结束屏幕";
             this.HasEndScreen_Check.UseVisualStyleBackColor = true;
             this.HasEndScreen_Check.CheckedChanged += new System.EventHandler(this.HasEndScreen_Check_CheckedChanged);
             // 
@@ -258,7 +258,7 @@
             this.Chair_Group.Size = new System.Drawing.Size(305, 72);
             this.Chair_Group.TabIndex = 0;
             this.Chair_Group.TabStop = false;
-            this.Chair_Group.Text = "Stream Chair";
+            this.Chair_Group.Text = "直播椅";
             // 
             // GameChair_Checked
             // 
@@ -269,7 +269,7 @@
             this.GameChair_Checked.Name = "GameChair_Checked";
             this.GameChair_Checked.Size = new System.Drawing.Size(111, 17);
             this.GameChair_Checked.TabIndex = 6;
-            this.GameChair_Checked.Text = "Has Gaming Chair";
+            this.GameChair_Checked.Text = "有游戏椅";
             this.GameChair_Checked.UseVisualStyleBackColor = true;
             this.GameChair_Checked.CheckedChanged += new System.EventHandler(this.GameChair_Checked_CheckedChanged);
             // 
@@ -281,7 +281,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(191, 13);
             this.label1.TabIndex = 7;
-            this.label1.Text = "* Only applicable to some backgrounds";
+            this.label1.Text = "* 仅适用于某些背景";
             // 
             // StreamAdvancedOptions
             // 
@@ -298,7 +298,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "StreamAdvancedOptions";
-            this.Text = "Other Options";
+            this.Text = "其他选项";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.StreamAdvancedOptions_FormClosing);
             this.Load += new System.EventHandler(this.StreamAdvancedOptions_Load);
             this.StreamIntro_Group.ResumeLayout(false);

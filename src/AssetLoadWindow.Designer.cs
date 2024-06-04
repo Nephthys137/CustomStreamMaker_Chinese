@@ -40,7 +40,7 @@
             this.Wait_Label.Name = "Wait_Label";
             this.Wait_Label.Size = new System.Drawing.Size(171, 13);
             this.Wait_Label.TabIndex = 0;
-            this.Wait_Label.Text = "Loading in assets from the game....";
+            this.Wait_Label.Text = "正在从游戏加载资产....";
             this.Wait_Label.UseWaitCursor = true;
             // 
             // AssetToMem_Progress
@@ -64,7 +64,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AssetLoadWindow";
-            this.Text = "Please wait...";
+            this.Text = "请等待...";
             this.UseWaitCursor = true;
             this.Activated += new System.EventHandler(this.AssetLoadWindow_Activated);
             this.Shown += new System.EventHandler(this.AssetLoadWindow_Shown);

@@ -8,7 +8,7 @@ namespace CustomStreamMaker
     public partial class CustomAssetPreview : Form
     {
         internal StreamEditor streamEditor;
-        List<CustomAsset> assetList;
+        readonly List<CustomAsset> assetList;
         CustomAsset currentPreview;
         bool isDeleting;
         bool isSearchTouched;
@@ -38,13 +38,13 @@ namespace CustomStreamMaker
             {
                 if (searchTxt.StartsWith("s:"))
                 {
-                    searcher = searchTxt.Substring(0, 2);
+                    searcher = searchTxt[..2];
                     filter = CustomAssetType.Sprite;
                     searchTxt = searchTxt.Replace(searcher, "");
                 }
                 else if (searchTxt.StartsWith("b:"))
                 {
-                    searcher = searchTxt.Substring(0, 2);
+                    searcher = searchTxt[..2];
                     filter = CustomAssetType.Background;
                     searchTxt = searchTxt.Replace(searcher, "");
                 }
@@ -132,11 +132,9 @@ namespace CustomStreamMaker
             CustomAsset selectedAsset = assetList.Find(a => a.filePath == item.SubItems[2].Text
                                                        && a.fileName == item.SubItems[1].Text
                                                        && a.customAssetType == (CustomAssetType)Enum.Parse(typeof(CustomAssetType), item.SubItems[0].Text));
-            if (selectedAsset.customAssetType == CustomAssetType.Background)
-            {
-                CustomAssetsPreviewPic.Image = AssetExtractor.GetCachedBackground(selectedAsset.fileName);
-            }
-            else CustomAssetsPreviewPic.Image = AssetExtractor.GetCachedSprite(selectedAsset.fileName);
+            CustomAssetsPreviewPic.Image = selectedAsset.customAssetType == CustomAssetType.Background
+                ? AssetExtractor.GetCachedBackground(selectedAsset.fileName)
+                : AssetExtractor.GetCachedSprite(selectedAsset.fileName);
             currentPreview = selectedAsset;
         }
 

@@ -31,9 +31,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CustomAssetPreview));
             this.CustomAssetsPreviewPic = new System.Windows.Forms.PictureBox();
             this.CustomAssetsListView = new System.Windows.Forms.ListView();
-            this.Type = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.FilePath = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Type = new System.Windows.Forms.ColumnHeader();
+            this.Name = new System.Windows.Forms.ColumnHeader();
+            this.FilePath = new System.Windows.Forms.ColumnHeader();
             this.AddBackground_Button = new System.Windows.Forms.Button();
             this.AddAnimation_AssetLz4 = new System.Windows.Forms.Button();
             this.AddAnimation_AddressableLz4 = new System.Windows.Forms.Button();
@@ -72,16 +72,16 @@
             // 
             // Type
             // 
-            this.Type.Text = "Type";
+            this.Type.Text = "类型";
             // 
             // Name
             // 
-            this.Name.Text = "Name";
+            this.Name.Text = "名称";
             this.Name.Width = 173;
             // 
             // FilePath
             // 
-            this.FilePath.Text = "Path";
+            this.FilePath.Text = "路径";
             this.FilePath.Width = 299;
             // 
             // AddBackground_Button
@@ -90,7 +90,7 @@
             this.AddBackground_Button.Name = "AddBackground_Button";
             this.AddBackground_Button.Size = new System.Drawing.Size(348, 39);
             this.AddBackground_Button.TabIndex = 0;
-            this.AddBackground_Button.Text = "Import Image For Background (jpg, png)";
+            this.AddBackground_Button.Text = "导入背景图像 (jpg, png)";
             this.AddBackground_Button.UseVisualStyleBackColor = true;
             this.AddBackground_Button.Click += new System.EventHandler(this.AddBackground_Button_Click);
             // 
@@ -100,7 +100,7 @@
             this.AddAnimation_AssetLz4.Name = "AddAnimation_AssetLz4";
             this.AddAnimation_AssetLz4.Size = new System.Drawing.Size(348, 39);
             this.AddAnimation_AssetLz4.TabIndex = 1;
-            this.AddAnimation_AssetLz4.Text = "Import Animation Clip From Asset Bundle";
+            this.AddAnimation_AssetLz4.Text = "从Asset Bundle导入动画";
             this.AddAnimation_AssetLz4.UseVisualStyleBackColor = true;
             this.AddAnimation_AssetLz4.Click += new System.EventHandler(this.AddAnimation_AssetLz4_Click);
             // 
@@ -110,7 +110,7 @@
             this.AddAnimation_AddressableLz4.Name = "AddAnimation_AddressableLz4";
             this.AddAnimation_AddressableLz4.Size = new System.Drawing.Size(348, 39);
             this.AddAnimation_AddressableLz4.TabIndex = 2;
-            this.AddAnimation_AddressableLz4.Text = "Import Animation Clip From Addressable Bundle";
+            this.AddAnimation_AddressableLz4.Text = "从Addressable Bundle导入动画";
             this.AddAnimation_AddressableLz4.UseVisualStyleBackColor = true;
             this.AddAnimation_AddressableLz4.Click += new System.EventHandler(this.AddAnimation_AddressableLz4_Click);
             // 
@@ -140,7 +140,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Text = "Custom Asset Viewer";
+            this.Text = "自定义资产查看器";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CustomAssetPreview_FormClosing);
             this.Load += new System.EventHandler(this.CustomAssetPreview_Load);
             this.Click += new System.EventHandler(this.CustomAssetPreview_Click);
@@ -157,7 +157,7 @@
         private System.Windows.Forms.Button AddBackground_Button;
         private System.Windows.Forms.Button AddAnimation_AssetLz4;
         private System.Windows.Forms.ColumnHeader Type;
-        private System.Windows.Forms.ColumnHeader Name;
+        private new System.Windows.Forms.ColumnHeader Name;
         private System.Windows.Forms.ColumnHeader FilePath;
         private System.Windows.Forms.Button AddAnimation_AddressableLz4;
         private System.Windows.Forms.TextBox SearchBar;
